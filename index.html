@@ -2,215 +2,223 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>5 Dakikada İngilizce Verb Master</title>
+    <title>5 dakikada ingilizce cümle sihirbazı</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <style>
         :root { 
-            --bg-dark: #0f172a; --card-bg: rgba(30, 41, 59, 0.7); 
+            --bg: #0f172a; --card: rgba(30, 41, 59, 0.8); 
             --primary: #38bdf8; --secondary: #2dd4bf; --accent: #fb7185; 
-            --text-main: #f8fafc; --logo-grad: linear-gradient(90deg, #ff4d4d, #f97316); 
+            --text: #f8fafc; --grad: linear-gradient(90deg, #ff4d4d, #f97316); 
         }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: #0f172a; color: var(--text-main); overflow-x: hidden; padding: 10px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; text-transform: lowercase; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 10px; overflow-x: hidden; }
         
-        #entry-page { display: flex; flex-direction: column; align-items: center; width: 100%; }
-        #app-screen, #generate-screen { display: none; width: 100%; max-width: 400px; margin: auto; flex-direction: column; }
+        /* HEADER */
+        .header { text-align: center; padding: 10px 0; }
+        .sub-title { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 24px; font-weight: 900; font-family: 'Poppins'; }
 
-        .main-title-white { font-family: 'Poppins'; font-size: 18px; font-weight: 900; opacity: 0.8; }
-        .select-lesson-title { background: var(--logo-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 22px; margin: 0 0 15px 0; font-weight: 900; font-family: 'Poppins'; }
+        /* SİHİRBAZ ALANI */
+        .wizard-box { background: var(--card); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px; margin-bottom: 15px; }
+        .label { font-size: 11px; color: var(--primary); font-weight: 800; margin: 8px 0 4px 5px; }
+        .selectors { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        select { background: #1e293b; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px; border-radius: 12px; font-size: 14px; width: 100%; outline: none; appearance: none; }
         
-        /* MOBİL UYUMLU 3'LÜ MINI GRID */
-        .section-header { width: 100%; text-align: left; font-family: 'Poppins'; font-size: 14px; color: var(--primary); margin: 15px 0 8px 5px; border-left: 3px solid var(--accent); padding-left: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        #lesson-list-container { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding-bottom: 40px; }
-        
-        .lesson-card { background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 10px 4px; display: flex; flex-direction: column; justify-content: center; min-height: 60px; transition: transform 0.1s; }
-        .lesson-card:active { transform: scale(0.92); background: rgba(255,255,255,0.15); }
-        .lesson-card h3 { margin: 0; font-family: 'Inter'; font-size: 0.85rem; font-weight: 700; color: #fff; text-transform: lowercase; } /* KÜÇÜK HARF */
-        .lesson-card p { margin: 2px 0 0 0; font-size: 8px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .result-display { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; text-align: center; margin-top: 15px; border: 1px dashed var(--secondary); }
+        .sentence-en { font-size: 20px; font-weight: 800; color: var(--secondary); margin-bottom: 5px; min-height: 28px; }
+        .sentence-tr { font-size: 13px; color: #94a3b8; }
 
-        .app-box { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; width: 100%; }
-        .lesson-title-grad { background: var(--logo-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; font-size: 24px; font-family: 'Poppins'; text-transform: lowercase; }
+        /* LİSTE ALANI */
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .section-title { grid-column: span 3; color: var(--accent); font-size: 13px; font-weight: 800; margin: 15px 0 5px 5px; border-left: 3px solid var(--accent); padding-left: 8px; }
+        .v-mini-card { background: var(--card); border-radius: 10px; padding: 10px 5px; text-align: center; border: 1px solid rgba(255,255,255,0.05); min-height: 55px; display: flex; flex-direction: column; justify-content: center; }
+        .v-mini-card h3 { margin: 0; font-size: 12px; }
+        .v-mini-card p { margin: 2px 0 0 0; font-size: 9px; color: #94a3b8; white-space: nowrap; overflow: hidden; }
 
-        /* KART TASARIMI */
-        .card-container { perspective: 1000px; width: 100%; height: 180px; margin: 15px 0; }
-        .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; }
-        .card.flipped { transform: rotateY(180deg); }
-        .face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); font-family: 'Poppins'; }
-        .front { background: #1e293b; color: var(--secondary); font-size: 22px; font-weight: 800; }
-        .back { background: #1e293b; color: #fff; transform: rotateY(180deg); font-size: 18px; font-weight: 700; border-color: var(--primary); }
-
-        .btn-main { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a; width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .nav-btn { background: rgba(255,255,255,0.08); border-radius: 10px; height: 35px; padding: 0 12px; font-size: 11px; color: white; border: none; display: flex; align-items: center; gap: 5px; }
-        
-        .btn-ai-generate { width: 100%; max-width: 300px; background: var(--logo-grad); border: none; border-radius: 12px; padding: 12px; color: white; font-weight: 800; cursor: pointer; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; }
-        .gen-input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px; color: white; font-size: 16px; margin-bottom: 10px; text-align: center; }
+        /* MODAL / DERS */
+        #lesson-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; padding: 20px; flex-direction: column; }
+        .card-main { background: var(--card); border-radius: 30px; padding: 40px 20px; text-align: center; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-speak { background: var(--grad); border: none; padding: 15px; border-radius: 15px; color: #fff; font-weight: 900; width: 100%; margin-top: 20px; font-family: 'Poppins'; }
     </style>
 </head>
 <body>
 
-    <div id="entry-page">
-        <div class="main-title-white">5 dakikada ingilizce</div>
-        <div class="select-lesson-title">verb master</div>
+    <div class="header">
+        <div class="sub-title">cümle sihirbazı</div>
+    </div>
+
+    <div class="wizard-box">
+        <div class="selectors">
+            <div>
+                <div class="label">özne</div>
+                <select id="sel-sub" onchange="build()"></select>
+            </div>
+            <div>
+                <div class="label">zaman / yapı</div>
+                <select id="sel-tense" onchange="build()">
+                    <option value="present">geniş zaman (goes)</option>
+                    <option value="past">geçmiş zaman (went)</option>
+                    <option value="present_cont">şimdiki zaman (is going)</option>
+                    <option value="past_cont">geçmiş hikaye (was going)</option>
+                    <option value="perfect">yakın geçmiş (has gone)</option>
+                    <option value="future">gelecek (will go)</option>
+                    <option value="neg_past">olumsuz geçmiş (didn't go)</option>
+                    <option value="q_past">soru geçmiş (did he go?)</option>
+                </select>
+            </div>
+        </div>
         
-        <button class="btn-ai-generate" onclick="showGenerateScreen()">
-            <span class="material-symbols-rounded">search</span> fiil ara / oluştur
-        </button>
+        <div class="label">fiil seçimi</div>
+        <select id="sel-verb" onchange="build()"></select>
 
-        <div id="lesson-list-container"></div>
-    </div>
-
-    <div id="generate-screen">
-        <div class="app-box">
-            <h2 class="lesson-title-grad">fiil bul</h2>
-            <input class="gen-input" type="text" id="genVerbInput" placeholder="fiili yazın..." onkeydown="if(event.key==='Enter') startGenerateLesson()">
-            <button class="btn-main" onclick="startGenerateLesson()">başlat</button>
-            <button class="nav-btn" style="width:100%; margin-top:10px; justify-content:center;" onclick="goHome()">vazgeç</button>
+        <div class="result-display" onclick="speakResult()">
+            <div class="sentence-en" id="res-en">...</div>
+            <div class="sentence-tr" id="res-tr">...</div>
+            <div style="font-size: 9px; color: var(--primary); margin-top: 10px;">(seslendirmek için dokun)</div>
         </div>
     </div>
 
-    <div id="app-screen">
-        <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
-            <button class="nav-btn" onclick="goHome()"><span class="material-symbols-rounded">arrow_back</span> geri</button>
-            <button id="shuffleToggle" class="nav-btn" onclick="toggleShuffle()"><span class="material-symbols-rounded">shuffle</span> karışık</button>
-        </div>
-        <div class="app-box">
-            <div id="lessonTitle" class="lesson-title-grad">...</div>
-            <div id="lessonContent" style="color: #94a3b8; font-size: 11px; margin-bottom: 10px; text-transform: lowercase;"></div>
-            
-            <div class="card-container" onclick="handleFlip()">
-                <div class="card" id="mainCard">
-                    <div class="face front" id="trDisplay">...</div>
-                    <div class="face back" id="engDisplay">...</div>
-                </div>
-            </div>
+    <div class="grid-container" id="main-grid"></div>
 
-            <div style="display:flex; gap:8px;">
-                <button class="nav-btn" style="flex:1; justify-content:center;" onclick="goPrev()">önceki</button>
-                <button class="nav-btn" style="flex:1; justify-content:center;" onclick="goNext()">sonraki</button>
-            </div>
-            
-            <button class="btn-main" style="margin-top:10px;" onclick="speakEN()">
-                <span class="material-symbols-rounded">volume_up</span> sesli dinle
-            </button>
+    <div id="lesson-screen">
+        <button onclick="this.parentElement.style.display='none'" style="background:none; border:none; color:#fff; font-size:14px;">✕ kapat</button>
+        <div class="card-main">
+            <div id="l-title" style="font-size: 32px; font-weight: 900; color: var(--primary);"></div>
+            <div id="l-detail" style="margin: 20px 0; font-size: 18px; line-height: 1.6;"></div>
+            <button class="btn-speak" onclick="speakLesson()">sesli dinle</button>
         </div>
     </div>
 
     <script>
-        let verbLibrary = { irregular: {}, regular: {} };
-        let allVerbsFlattened = {};
-        let cards = [], currentIndex = 0, originalCards = [];
-        let shuffleMode = false;
+        // VERİ HAVUZU (Fiiller, Anlamlar ve Nesne Eşleşmeleri) 
+        const verbData = {
+            "go": { v2:"went", v3:"gone", tr:"gitmek", obj:"to school" },
+            "do": { v2:"did", v3:"done", tr:"yapmak", obj:"homework" },
+            "be": { v1:"be", v2:"was/were", v3:"been", tr:"olmak", obj:"happy" },
+            "have": { v2:"had", v3:"had", tr:"sahip olmak", obj:"a car" },
+            "eat": { v2:"ate", v3:"eaten", tr:"yemek", obj:"an apple" },
+            "read": { v2:"read", v3:"read", tr:"okumak", obj:"a book" },
+            "speak": { v2:"spoke", v3:"spoken", tr:"konuşmak", obj:"english" },
+            "drink": { v2:"drank", v3:"drunk", tr:"su", obj:"water" },
+            "write": { v2:"wrote", v3:"written", tr:"yazmak", obj:"a letter" },
+            "sleep": { v2:"slept", v3:"slept", tr:"uyumak", obj:"well" },
+            "run": { v2:"ran", v3:"run", tr:"koşmak", obj:"fast" },
+            "study": { v2:"studied", v3:"studied", tr:"çalışmak", obj:"lesson", reg:true },
+            "play": { v2:"played", v3:"played", tr:"oynamak", obj:"football", reg:true },
+            "clean": { v2:"cleaned", v3:"cleaned", tr:"temizlemek", obj:"the room", reg:true }
+            // Buraya istediğin kadar fiil ekleyebilirsin
+        };
 
-        // JSON YÜKLEME (MOBİL İÇİN HATA KONTROLLÜ)
-        fetch('verbs.json')
-            .then(res => {
-                if(!res.ok) throw new Error("JSON dosyası bulunamadı!");
-                return res.json();
-            })
-            .then(data => {
-                verbLibrary = data;
-                // Tüm anahtarları küçük harfe çevirerek düzleştir
-                Object.keys(data.irregular).forEach(k => allVerbsFlattened[k.toLowerCase()] = data.irregular[k]);
-                Object.keys(data.regular).forEach(k => allVerbsFlattened[k.toLowerCase()] = data.regular[k]);
-                renderHomeGrid();
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Veriler yüklenemedi! verbs.json dosyasının aynı klasörde olduğundan emin olun.");
+        const subjects = ["I", "You", "He", "She", "It", "We", "They"];
+
+        function init() {
+            const sSub = document.getElementById('sel-sub');
+            const sVerb = document.getElementById('sel-verb');
+            const grid = document.getElementById('main-grid');
+
+            subjects.forEach(s => sSub.add(new Option(s, s)));
+            
+            // Alfabetik fiil listesi ve Grid
+            Object.keys(verbData).sort().forEach(v => {
+                sVerb.add(new Option(v, v));
+                
+                // Grid Kartı oluşturma
+                const card = document.createElement('div');
+                card.className = 'v-mini-card';
+                card.onclick = () => {
+                    document.getElementById('l-title').innerText = v;
+                    document.getElementById('l-detail').innerHTML = `v1: ${v}<br>v2: ${verbData[v].v2}<br>v3: ${verbData[v].v3}<br>anlam: ${verbData[v].tr}`;
+                    document.getElementById('lesson-screen').style.display = 'flex';
+                };
+                card.innerHTML = `<h3>${v}</h3><p>${verbData[v].tr}</p>`;
+                grid.appendChild(card);
             });
 
-        function renderHomeGrid() {
-            const container = document.getElementById('lesson-list-container');
-            container.innerHTML = "";
-
-            const sections = [
-                { title: "düzensiz (irregular)", data: verbLibrary.irregular },
-                { title: "düzenli (regular)", data: verbLibrary.regular }
-            ];
-
-            sections.forEach(sec => {
-                const header = document.createElement('div');
-                header.className = 'section-header';
-                header.innerText = sec.title;
-                header.style.gridColumn = "span 3";
-                container.appendChild(header);
-
-                Object.keys(sec.data).forEach(key => {
-                    const item = sec.data[key];
-                    const div = document.createElement('div');
-                    div.className = 'lesson-card';
-                    div.onclick = () => startLesson(key);
-                    div.innerHTML = `<h3>${item.v1.toLowerCase()}</h3><p>${item.tr.toLowerCase()}</p>`;
-                    container.appendChild(div);
-                });
-            });
+            build();
         }
 
-        function startLesson(verbKey) {
-            const data = allVerbsFlattened[verbKey.toLowerCase()];
-            if (!data) return alert("fiil bulunamadı!");
+        function build() {
+            const s = document.getElementById('sel-sub').value;
+            const vKey = document.getElementById('sel-verb').value;
+            const t = document.getElementById('sel-tense').value;
+            const v = verbData[vKey];
+            const obj = v.obj;
 
-            cards = [
-                { tr: "yalın hal (v1)", en: data.v1.toLowerCase() },
-                { tr: "geçmiş zaman (v2)", en: data.v2.toLowerCase() },
-                { tr: "ortaç hal (v3)", en: (data.v3 || data.en3).toLowerCase() },
-                { tr: "türkçe anlamı", en: data.tr.toLowerCase() }
-            ];
-            originalCards = [...cards];
-            currentIndex = 0;
-            
-            document.getElementById('lessonTitle').innerText = data.v1.toLowerCase();
-            document.getElementById('lessonContent').innerText = `${data.v1} - ${data.v2} - ${data.v3 || data.en3}`.toLowerCase();
-            
-            document.getElementById('entry-page').style.display = 'none';
-            document.getElementById('generate-screen').style.display = 'none';
-            document.getElementById('app-screen').style.display = 'flex';
-            window.scrollTo(0,0);
-            showCard();
+            let en = "";
+            let tr = "";
+
+            const isThird = ["He", "She", "It"].includes(s);
+
+            switch(t) {
+                case "present":
+                    let v1 = vKey;
+                    if(isThird) {
+                        if(vKey === "go") v1 = "goes";
+                        else if(vKey === "do") v1 = "does";
+                        else if(vKey === "have") v1 = "has";
+                        else if(vKey === "be") v1 = "is";
+                        else v1 += "s";
+                    } else {
+                        if(vKey === "be") v1 = "am/are";
+                    }
+                    en = `${s} ${v1} ${obj}`;
+                    tr = `${s} ${v.tr} (geniş zaman)`;
+                    break;
+                case "past":
+                    let v2 = v.v2;
+                    if(vKey === "be") v2 = isThird || s === "I" ? "was" : "were";
+                    en = `${s} ${v2} ${obj}`;
+                    tr = `${s} ${v.tr} (geçmiş zaman)`;
+                    break;
+                case "present_cont":
+                    let be = isThird ? "is" : (s === "I" ? "am" : "are");
+                    en = `${s} ${be} ${vKey}ing ${obj}`;
+                    tr = `${s} ${v.tr} (şimdiki zaman)`;
+                    break;
+                case "past_cont":
+                    let was = isThird || s === "I" ? "was" : "were";
+                    en = `${s} ${was} ${vKey}ing ${obj}`;
+                    tr = `${s} ${v.tr} (o sırada yapıyordu)`;
+                    break;
+                case "perfect":
+                    let have = isThird ? "has" : "have";
+                    en = `${s} ${have} ${v.v3} ${obj}`;
+                    tr = `${s} ${v.tr} (etkisi sürüyor)`;
+                    break;
+                case "future":
+                    en = `${s} will ${vKey} ${obj}`;
+                    tr = `${s} ${v.tr} (gelecek zaman)`;
+                    break;
+                case "neg_past":
+                    en = `${s} didn't ${vKey} ${obj}`;
+                    tr = `${s} ${v.tr} (yapmadı)`;
+                    break;
+                case "q_past":
+                    en = `did ${s} ${vKey} ${obj}?`;
+                    tr = `${s} ${v.tr} (yaptı mı?)`;
+                    break;
+            }
+
+            document.getElementById('res-en').innerText = en;
+            document.getElementById('res-tr').innerText = tr;
         }
 
-        function startGenerateLesson() {
-            const val = document.getElementById('genVerbInput').value.trim().toLowerCase();
-            if(val) startLesson(val);
+        function speakResult() {
+            const txt = document.getElementById('res-en').innerText;
+            const ut = new SpeechSynthesisUtterance(txt);
+            ut.lang = 'en-US';
+            window.speechSynthesis.speak(ut);
         }
 
-        function showCard() {
-            const card = cards[currentIndex];
-            document.getElementById('trDisplay').innerText = card.tr;
-            document.getElementById('engDisplay').innerText = card.en;
-            document.getElementById('mainCard').classList.remove('flipped');
+        function speakLesson() {
+            const txt = document.getElementById('l-title').innerText;
+            const ut = new SpeechSynthesisUtterance(txt);
+            ut.lang = 'en-US';
+            window.speechSynthesis.speak(ut);
         }
 
-        function handleFlip() { document.getElementById('mainCard').classList.toggle('flipped'); }
-        function goNext() { if(currentIndex < cards.length-1) { currentIndex++; showCard(); } }
-        function goPrev() { if(currentIndex > 0) { currentIndex--; showCard(); } }
-
-        function toggleShuffle() {
-            shuffleMode = !shuffleMode;
-            document.getElementById('shuffleToggle').style.background = shuffleMode ? "var(--accent)" : "rgba(255,255,255,0.08)";
-            cards = shuffleMode ? [...cards].sort(() => Math.random() - 0.5) : [...originalCards];
-            currentIndex = 0;
-            showCard();
-        }
-
-        function speakEN() {
-            const msg = new SpeechSynthesisUtterance(cards[currentIndex].en);
-            msg.lang = 'en-US';
-            window.speechSynthesis.speak(msg);
-        }
-
-        function goHome() {
-            document.getElementById('app-screen').style.display = 'none';
-            document.getElementById('generate-screen').style.display = 'none';
-            document.getElementById('entry-page').style.display = 'flex';
-        }
-
-        function showGenerateScreen() {
-            document.getElementById('entry-page').style.display = 'none';
-            document.getElementById('generate-screen').style.display = 'flex';
-        }
+        window.onload = init;
     </script>
 </body>
 </html>
