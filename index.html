@@ -2,223 +2,201 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>5 dakikada ingilizce cümle sihirbazı</title>
+    <title>5 Dakikada İngilizce - Ultimate Matrix v3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <style>
-        :root { 
-            --bg: #0f172a; --card: rgba(30, 41, 59, 0.8); 
-            --primary: #38bdf8; --secondary: #2dd4bf; --accent: #fb7185; 
-            --text: #f8fafc; --grad: linear-gradient(90deg, #ff4d4d, #f97316); 
-        }
+        :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.8); --primary: #38bdf8; --secondary: #2dd4bf; --accent: #fb7185; --text: #f8fafc; --grad: linear-gradient(90deg, #ff4d4d, #f97316); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; text-transform: lowercase; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 10px; overflow-x: hidden; }
-        
-        /* HEADER */
-        .header { text-align: center; padding: 10px 0; }
-        .sub-title { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 24px; font-weight: 900; font-family: 'Poppins'; }
-
-        /* SİHİRBAZ ALANI */
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 10px; }
+        .sub-title { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 22px; font-weight: 900; font-family: 'Poppins'; text-align: center; padding: 10px 0; }
         .wizard-box { background: var(--card); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px; margin-bottom: 15px; }
         .label { font-size: 11px; color: var(--primary); font-weight: 800; margin: 8px 0 4px 5px; }
-        .selectors { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        select { background: #1e293b; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px; border-radius: 12px; font-size: 14px; width: 100%; outline: none; appearance: none; }
+        select { background: #1e293b; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px; border-radius: 12px; font-size: 14px; width: 100%; outline: none; margin-bottom: 8px; appearance: none; }
         
-        .result-display { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; text-align: center; margin-top: 15px; border: 1px dashed var(--secondary); }
-        .sentence-en { font-size: 20px; font-weight: 800; color: var(--secondary); margin-bottom: 5px; min-height: 28px; }
-        .sentence-tr { font-size: 13px; color: #94a3b8; }
+        /* MATRIX TABS */
+        .matrix-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 15px; }
+        .m-btn { padding: 8px 2px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 9px; cursor: pointer; font-weight: 700; }
+        .m-btn.active { background: var(--accent); border-color: var(--accent); }
 
-        /* LİSTE ALANI */
-        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-        .section-title { grid-column: span 3; color: var(--accent); font-size: 13px; font-weight: 800; margin: 15px 0 5px 5px; border-left: 3px solid var(--accent); padding-left: 8px; }
-        .v-mini-card { background: var(--card); border-radius: 10px; padding: 10px 5px; text-align: center; border: 1px solid rgba(255,255,255,0.05); min-height: 55px; display: flex; flex-direction: column; justify-content: center; }
-        .v-mini-card h3 { margin: 0; font-size: 12px; }
-        .v-mini-card p { margin: 2px 0 0 0; font-size: 9px; color: #94a3b8; white-space: nowrap; overflow: hidden; }
-
-        /* MODAL / DERS */
-        #lesson-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; padding: 20px; flex-direction: column; }
-        .card-main { background: var(--card); border-radius: 30px; padding: 40px 20px; text-align: center; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1); }
-        .btn-speak { background: var(--grad); border: none; padding: 15px; border-radius: 15px; color: #fff; font-weight: 900; width: 100%; margin-top: 20px; font-family: 'Poppins'; }
+        .display-area { background: rgba(0,0,0,0.5); padding: 25px 15px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); margin-top: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .en-res { font-size: 22px; font-weight: 800; color: var(--secondary); margin-bottom: 8px; line-height: 1.2; }
+        .tr-res { font-size: 14px; color: #94a3b8; font-style: italic; }
+        
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 20px; }
+        .v-card { background: var(--card); border-radius: 10px; padding: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="sub-title">cümle sihirbazı</div>
+<div class="sub-title">excel cümlem master pro</div>
+
+<div class="wizard-box">
+    <div class="matrix-tabs">
+        <button class="m-btn active" onclick="setM('pos', this)">+ olumlu</button>
+        <button class="m-btn" onclick="setM('neg', this)">- olumsuz</button>
+        <button class="m-btn" onclick="setM('q_pos', this)">? soru</button>
+        <button class="m-btn" onclick="setM('q_neg', this)">?- olumsuz soru</button>
     </div>
 
-    <div class="wizard-box">
-        <div class="selectors">
-            <div>
-                <div class="label">özne</div>
-                <select id="sel-sub" onchange="build()"></select>
-            </div>
-            <div>
-                <div class="label">zaman / yapı</div>
-                <select id="sel-tense" onchange="build()">
-                    <option value="present">geniş zaman (goes)</option>
-                    <option value="past">geçmiş zaman (went)</option>
-                    <option value="present_cont">şimdiki zaman (is going)</option>
-                    <option value="past_cont">geçmiş hikaye (was going)</option>
-                    <option value="perfect">yakın geçmiş (has gone)</option>
-                    <option value="future">gelecek (will go)</option>
-                    <option value="neg_past">olumsuz geçmiş (didn't go)</option>
-                    <option value="q_past">soru geçmiş (did he go?)</option>
-                </select>
-            </div>
+    <div class="label">soru tipi (5w1k & special)</div>
+    <select id="sel-wh" onchange="build()">
+        <option value="none">direkt cümle / soru</option>
+        <option value="why">why (neden)</option>
+        <option value="where">where (nerede)</option>
+        <option value="when">when (ne zaman)</option>
+        <option value="what_time">what time (saat kaçta)</option>
+        <option value="how">how (nasıl)</option>
+        <option value="how_often">how often (ne sıklıkla)</option>
+        <option value="who_subj">who (özne: kim gider?)</option>
+        <option value="who_obj">who ... with (nesne: kiminle?)</option>
+        <option value="whose">whose friend (kimin arkadaşı?)</option>
+        <option value="which_bus">which bus (hangi otobüs?)</option>
+        <option value="which_friend">which of your friends (arkadaşlarından hangisi?)</option>
+    </select>
+
+    <div style="display: flex; gap: 8px;">
+        <div style="flex: 1;">
+            <div class="label">özne</div>
+            <select id="sel-sub" onchange="build()">
+                <option value="I">I</option>
+                <option value="you">you</option>
+                <option value="he">he</option>
+                <option value="she">she</option>
+                <option value="we">we</option>
+                <option value="they">they</option>
+            </select>
         </div>
+        <div style="flex: 1.5;">
+            <div class="label">zaman / modal (16 yapı)</div>
+            <select id="sel-tense" onchange="build()">
+                <option value="1">1. geniş zaman (simple)</option>
+                <option value="2">2. şimdiki zaman (cont.)</option>
+                <option value="3">3. geçmiş hikaye (-yordu)</option>
+                <option value="4">4. dili geçmiş (-di)</option>
+                <option value="5">5. yakın geçmiş (perfect)</option>
+                <option value="6">6. mış geçmiş (past perf.)</option>
+                <option value="7">7. gelecek (will)</option>
+                <option value="8">8. can (yetenek)</option>
+                <option value="9">9. may (ihtimal)</option>
+                <option value="10">10. could (past can)</option>
+                <option value="11">11. should (tavsiye)</option>
+                <option value="12">12. would (istek)</option>
+                <option value="13">13. must (zorunluluk)</option>
+                <option value="14">14. has to / have to</option>
+                <option value="15">15. used to (eskiden)</option>
+                <option value="16">16. be going to</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="label">fiil</div>
+    <select id="sel-verb" onchange="build()"></select>
+
+    <div class="display-area" onclick="speak()">
+        <div class="en-res" id="res-en">...</div>
+        <div class="tr-res" id="res-tr">...</div>
+    </div>
+</div>
+
+<div class="grid" id="main-grid"></div>
+
+<script>
+    // EXCEL DATA ENGINE
+    const verbList = {
+        "go": { v1:"go", v2:"went", v3:"gone", tr:"gitmek", obj:"to london" },
+        "do": { v1:"do", v2:"did", v3:"done", tr:"yapmak", obj:"homework" },
+        "eat": { v1:"eat", v2:"ate", v3:"eaten", tr:"yemek", obj:"dinner" }
+    };
+
+    let activeMatrix = 'pos'; // pos, neg, q_pos, q_neg
+
+    function setM(m, b) {
+        activeMatrix = m;
+        document.querySelectorAll('.m-btn').forEach(btn => btn.classList.remove('active'));
+        b.classList.add('active');
+        build();
+    }
+
+    function init() {
+        const vSelect = document.getElementById('sel-verb');
+        Object.keys(verbList).forEach(v => {
+            vSelect.add(new Option(v, v));
+            const card = document.createElement('div');
+            card.className = 'v-card';
+            card.innerHTML = `<h3>${v}</h3>`;
+            card.onclick = () => { vSelect.value = v; build(); };
+            document.getElementById('main-grid').appendChild(card);
+        });
+        build();
+    }
+
+    function build() {
+        const s = document.getElementById('sel-sub').value;
+        const vK = document.getElementById('sel-verb').value;
+        const t = document.getElementById('sel-tense').value;
+        const wh = document.getElementById('sel-wh').value;
+        const v = verbList[vK];
         
-        <div class="label">fiil seçimi</div>
-        <select id="sel-verb" onchange="build()"></select>
+        const isSing = (s === 'he' || s === 'she' || s === 'it');
+        let en = "";
+        let tr = "";
 
-        <div class="result-display" onclick="speakResult()">
-            <div class="sentence-en" id="res-en">...</div>
-            <div class="sentence-tr" id="res-tr">...</div>
-            <div style="font-size: 9px; color: var(--primary); margin-top: 10px;">(seslendirmek için dokun)</div>
-        </div>
-    </div>
+        // EXCEL MATRIX ENGINE (16 TENSE x ALL MODES)
+        // Yardımcı Fiil Karar Mekanizması
+        let aux = ""; 
+        let auxNeg = "";
+        let v_form = v.v1;
 
-    <div class="grid-container" id="main-grid"></div>
-
-    <div id="lesson-screen">
-        <button onclick="this.parentElement.style.display='none'" style="background:none; border:none; color:#fff; font-size:14px;">✕ kapat</button>
-        <div class="card-main">
-            <div id="l-title" style="font-size: 32px; font-weight: 900; color: var(--primary);"></div>
-            <div id="l-detail" style="margin: 20px 0; font-size: 18px; line-height: 1.6;"></div>
-            <button class="btn-speak" onclick="speakLesson()">sesli dinle</button>
-        </div>
-    </div>
-
-    <script>
-        // VERİ HAVUZU (Fiiller, Anlamlar ve Nesne Eşleşmeleri) 
-        const verbData = {
-            "go": { v2:"went", v3:"gone", tr:"gitmek", obj:"to school" },
-            "do": { v2:"did", v3:"done", tr:"yapmak", obj:"homework" },
-            "be": { v1:"be", v2:"was/were", v3:"been", tr:"olmak", obj:"happy" },
-            "have": { v2:"had", v3:"had", tr:"sahip olmak", obj:"a car" },
-            "eat": { v2:"ate", v3:"eaten", tr:"yemek", obj:"an apple" },
-            "read": { v2:"read", v3:"read", tr:"okumak", obj:"a book" },
-            "speak": { v2:"spoke", v3:"spoken", tr:"konuşmak", obj:"english" },
-            "drink": { v2:"drank", v3:"drunk", tr:"su", obj:"water" },
-            "write": { v2:"wrote", v3:"written", tr:"yazmak", obj:"a letter" },
-            "sleep": { v2:"slept", v3:"slept", tr:"uyumak", obj:"well" },
-            "run": { v2:"ran", v3:"run", tr:"koşmak", obj:"fast" },
-            "study": { v2:"studied", v3:"studied", tr:"çalışmak", obj:"lesson", reg:true },
-            "play": { v2:"played", v3:"played", tr:"oynamak", obj:"football", reg:true },
-            "clean": { v2:"cleaned", v3:"cleaned", tr:"temizlemek", obj:"the room", reg:true }
-            // Buraya istediğin kadar fiil ekleyebilirsin
-        };
-
-        const subjects = ["I", "You", "He", "She", "It", "We", "They"];
-
-        function init() {
-            const sSub = document.getElementById('sel-sub');
-            const sVerb = document.getElementById('sel-verb');
-            const grid = document.getElementById('main-grid');
-
-            subjects.forEach(s => sSub.add(new Option(s, s)));
-            
-            // Alfabetik fiil listesi ve Grid
-            Object.keys(verbData).sort().forEach(v => {
-                sVerb.add(new Option(v, v));
-                
-                // Grid Kartı oluşturma
-                const card = document.createElement('div');
-                card.className = 'v-mini-card';
-                card.onclick = () => {
-                    document.getElementById('l-title').innerText = v;
-                    document.getElementById('l-detail').innerHTML = `v1: ${v}<br>v2: ${verbData[v].v2}<br>v3: ${verbData[v].v3}<br>anlam: ${verbData[v].tr}`;
-                    document.getElementById('lesson-screen').style.display = 'flex';
-                };
-                card.innerHTML = `<h3>${v}</h3><p>${verbData[v].tr}</p>`;
-                grid.appendChild(card);
-            });
-
-            build();
-        }
-
-        function build() {
-            const s = document.getElementById('sel-sub').value;
-            const vKey = document.getElementById('sel-verb').value;
-            const t = document.getElementById('sel-tense').value;
-            const v = verbData[vKey];
-            const obj = v.obj;
-
-            let en = "";
-            let tr = "";
-
-            const isThird = ["He", "She", "It"].includes(s);
-
-            switch(t) {
-                case "present":
-                    let v1 = vKey;
-                    if(isThird) {
-                        if(vKey === "go") v1 = "goes";
-                        else if(vKey === "do") v1 = "does";
-                        else if(vKey === "have") v1 = "has";
-                        else if(vKey === "be") v1 = "is";
-                        else v1 += "s";
-                    } else {
-                        if(vKey === "be") v1 = "am/are";
-                    }
-                    en = `${s} ${v1} ${obj}`;
-                    tr = `${s} ${v.tr} (geniş zaman)`;
-                    break;
-                case "past":
-                    let v2 = v.v2;
-                    if(vKey === "be") v2 = isThird || s === "I" ? "was" : "were";
-                    en = `${s} ${v2} ${obj}`;
-                    tr = `${s} ${v.tr} (geçmiş zaman)`;
-                    break;
-                case "present_cont":
-                    let be = isThird ? "is" : (s === "I" ? "am" : "are");
-                    en = `${s} ${be} ${vKey}ing ${obj}`;
-                    tr = `${s} ${v.tr} (şimdiki zaman)`;
-                    break;
-                case "past_cont":
-                    let was = isThird || s === "I" ? "was" : "were";
-                    en = `${s} ${was} ${vKey}ing ${obj}`;
-                    tr = `${s} ${v.tr} (o sırada yapıyordu)`;
-                    break;
-                case "perfect":
-                    let have = isThird ? "has" : "have";
-                    en = `${s} ${have} ${v.v3} ${obj}`;
-                    tr = `${s} ${v.tr} (etkisi sürüyor)`;
-                    break;
-                case "future":
-                    en = `${s} will ${vKey} ${obj}`;
-                    tr = `${s} ${v.tr} (gelecek zaman)`;
-                    break;
-                case "neg_past":
-                    en = `${s} didn't ${vKey} ${obj}`;
-                    tr = `${s} ${v.tr} (yapmadı)`;
-                    break;
-                case "q_past":
-                    en = `did ${s} ${vKey} ${obj}?`;
-                    tr = `${s} ${v.tr} (yaptı mı?)`;
-                    break;
+        if (t === "1") { aux = isSing ? "does" : "do"; auxNeg = isSing ? "doesn't" : "don't"; }
+        if (t === "4") { aux = "did"; auxNeg = "didn't"; }
+        if (t === "7") { aux = "will"; auxNeg = "won't"; }
+        if (t === "8") { aux = "can"; auxNeg = "can't"; }
+        if (t === "11") { aux = "should"; auxNeg = "shouldn't"; }
+        if (t === "13") { aux = "must"; auxNeg = "mustn't"; }
+        if (t === "2") { aux = isSing ? "is" : (s === "I" ? "am" : "are"); auxNeg = isSing ? "isn't" : (s === "I" ? "am not" : "aren't"); v_form = v.v1 + "ing"; }
+        
+        // ÖZEL SORU TİPLERİ (Who, Which, Whose)
+        if (wh.startsWith("who_subj")) {
+            en = `who ${isSing || wh==='who_subj' ? v.v1+'s' : v.v1} ${v.obj}?`;
+        } else if (wh === "which_bus") {
+            en = `which bus ${isSing || true ? (t==='1'?'goes':'is going') : ''} ${v.obj}?`;
+        } else if (wh === "which_friend") {
+            en = `which of your friends ${isSing || true ? (t==='1'?'goes':'is going') : ''} ${v.obj}?`;
+        } 
+        // STANDART CÜMLE KURULUMU
+        else {
+            if (activeMatrix === 'pos') {
+                if (t === "1") en = `${s} ${isSing ? v.v1+'s' : v.v1} ${v.obj}`;
+                else if (t === "4") en = `${s} ${v.v2} ${v.obj}`;
+                else if (t === "2") en = `${s} ${aux} ${v.v1}ing ${v.obj}`;
+                else en = `${s} ${aux} ${v.v1} ${v.obj}`;
+            } 
+            else if (activeMatrix === 'neg') {
+                if (t === "2") en = `${s} ${auxNeg} ${v.v1}ing ${v.obj}`;
+                else en = `${s} ${auxNeg} ${v.v1} ${v.obj}`;
             }
-
-            document.getElementById('res-en').innerText = en;
-            document.getElementById('res-tr').innerText = tr;
+            else {
+                let whWord = wh === "none" ? "" : wh + " ";
+                let qAux = activeMatrix === 'q_neg' ? auxNeg : aux;
+                let tail = (wh === "who_obj") ? " with?" : "?";
+                let head = (wh === "who_obj") ? "who " : whWord;
+                
+                en = `${head}${qAux} ${s} ${v.v1}${t==='2'?'ing':''} ${v.obj}${tail}`;
+            }
         }
 
-        function speakResult() {
-            const txt = document.getElementById('res-en').innerText;
-            const ut = new SpeechSynthesisUtterance(txt);
-            ut.lang = 'en-US';
-            window.speechSynthesis.speak(ut);
-        }
+        document.getElementById('res-en').innerText = en;
+        document.getElementById('res-tr').innerText = `excel şablonu: ${v.tr} yapısı`;
+    }
 
-        function speakLesson() {
-            const txt = document.getElementById('l-title').innerText;
-            const ut = new SpeechSynthesisUtterance(txt);
-            ut.lang = 'en-US';
-            window.speechSynthesis.speak(ut);
-        }
+    function speak() {
+        const u = new SpeechSynthesisUtterance(document.getElementById('res-en').innerText);
+        u.lang = 'en-US';
+        window.speechSynthesis.speak(u);
+    }
 
-        window.onload = init;
-    </script>
+    window.onload = init;
+</script>
 </body>
 </html>
