@@ -62,7 +62,6 @@
         }
         .lesson-card:hover { border-color: #f97316; transform: translateY(-3px); }
         
-        /* GÖRSEL REVİZE 1: ANA SAYFA DERS KARTLARI - başlık ve içerik kesinlikle alt alta */
         .lesson-card h3 { 
             margin: 0 0 4px 0 !important; 
             font-family: 'Poppins' !important; 
@@ -104,10 +103,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); text-align: center; position: relative;
         }
 
-        .app-logo-small { width: 50px; margin-bottom: 5px; }
-        .app-brand-text { font-size: 11px; font-weight: 700; color: white; margin-bottom: 2px; }
-        
-        /* GÖRSEL REVİZE 2: DERS İÇİ BAŞLIK VE İÇERİK - kesinlikle alt satıra iner */
         .lesson-title-grad { 
             background: var(--logo-grad); 
             -webkit-background-clip: text; 
@@ -180,12 +175,11 @@
         }
         .stat-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
         .stat-label-row { display: flex; align-items: center; gap: 3px; font-size: 7px; color: #94a3b8; font-weight: 800; margin-bottom: 2px; }
-        .stat-label-row .material-symbols-rounded { font-size: 12px; }
         .stat-val { font-weight: 900; font-size: 14px; color: var(--primary); }
 
         .v-tag { position: absolute; top: 10px; right: 10px; font-size: 10px; color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 10px; }
 
-        /* --- AI GENERATE BUTTON ON HOME --- */
+        /* --- AI GENERATE BUTTON --- */
         .btn-ai-generate {
             width: 100%; max-width: 500px;
             background: linear-gradient(135deg, #f97316, #ff4d4d);
@@ -194,173 +188,58 @@
             cursor: pointer; margin-bottom: 16px;
             display: flex; align-items: center; justify-content: center; gap: 10px;
             box-shadow: 0 8px 25px rgba(249,115,22,0.3);
-            transition: transform 0.2s;
         }
-        .btn-ai-generate:hover { transform: translateY(-2px); }
 
         /* --- AI GENERATE SCREEN --- */
         #generate-screen {
             display: none; flex-direction: column; align-items: center;
-            width: 100%; max-width: 420px; max-height: 95vh; overflow-y: auto;
+            width: 100%; max-width: 420px;
         }
         .gen-box {
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             padding: 22px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); width: 100%;
+            width: 100%;
         }
-        .gen-title {
-            background: var(--logo-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-family: 'Poppins'; font-size: 22px; font-weight: 900;
-            margin-bottom: 4px; display: block;
-        }
-        .gen-subtitle {
-            color: #94a3b8; font-size: 12px; margin-bottom: 16px;
-            display: block; -webkit-text-fill-color: #94a3b8;
-        }
-
-        /* Kategori sekmeleri */
-        .gen-tabs {
-            display: flex; gap: 6px; margin-bottom: 14px;
-        }
+        .gen-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
         .gen-tab {
             flex: 1; padding: 8px 6px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.05);
-            color: #94a3b8; font-size: 11px; font-weight: 700;
-            cursor: pointer; text-align: center;
-            transition: all 0.2s; -webkit-text-fill-color: #94a3b8;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+            color: #94a3b8; font-size: 11px; font-weight: 700; cursor: pointer; text-align: center;
         }
-        .gen-tab.active {
-            background: linear-gradient(135deg, rgba(249,115,22,0.3), rgba(255,77,77,0.3));
-            border-color: #f97316; color: white; -webkit-text-fill-color: white;
-        }
+        .gen-tab.active { background: linear-gradient(135deg, #f97316, #ff4d4d); color: white; }
 
-        /* Fiil grid */
         .verb-grid-list {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 7px; margin-bottom: 16px;
-            max-height: 280px; overflow-y: auto;
-            padding-right: 2px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; 
+            margin-bottom: 16px; max-height: 250px; overflow-y: auto;
         }
-        .verb-grid-list::-webkit-scrollbar { width: 3px; }
-        .verb-grid-list::-webkit-scrollbar-track { background: transparent; }
-        .verb-grid-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-
         .verb-chip {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 9px 6px;
-            cursor: pointer; text-align: center;
-            transition: all 0.2s;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 8px; cursor: pointer; text-align: center;
         }
-        .verb-chip:hover { border-color: #f97316; background: rgba(249,115,22,0.1); }
-        .verb-chip.selected {
-            background: linear-gradient(135deg, rgba(249,115,22,0.35), rgba(255,77,77,0.35));
-            border-color: #f97316;
-            box-shadow: 0 0 12px rgba(249,115,22,0.3);
-        }
-        .verb-chip-v1 {
-            font-size: 13px; font-weight: 800; color: white;
-            -webkit-text-fill-color: white; display: block; line-height: 1.2;
-        }
-        .verb-chip-tr {
-            font-size: 9px; color: #64748b; -webkit-text-fill-color: #64748b;
-            display: block; margin-top: 2px; line-height: 1.2;
-        }
+        .verb-chip.selected { border-color: #f97316; background: rgba(249,115,22,0.2); }
+        .verb-chip span { display: block; }
+        .v-en { font-size: 12px; font-weight: 800; color: white; }
+        .v-tr { font-size: 9px; color: #64748b; }
 
-        /* Divider */
-        .gen-divider {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 14px;
-        }
-        .gen-divider span {
-            font-size: 11px; color: #475569; -webkit-text-fill-color: #475569;
-            white-space: nowrap;
-        }
-        .gen-divider::before, .gen-divider::after {
-            content: ''; flex: 1; height: 1px;
-            background: rgba(255,255,255,0.07);
-        }
-
-        /* Manuel input */
-        .gen-input-wrap { margin-bottom: 14px; }
-        .gen-input-wrap label {
-            display: block; font-size: 11px; font-weight: 700;
-            color: #94a3b8; letter-spacing: 1px; text-transform: uppercase;
-            margin-bottom: 6px; -webkit-text-fill-color: #94a3b8;
-        }
         .gen-input {
             width: 100%; background: rgba(255,255,255,0.06);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
-            padding: 12px 16px; color: white; font-size: 16px; font-weight: 800;
-            font-family: 'Poppins'; box-sizing: border-box;
-            -webkit-text-fill-color: white; transition: border-color 0.2s;
+            padding: 12px; color: white; font-family: 'Poppins'; margin-top: 10px;
+            box-sizing: border-box;
         }
-        .gen-input:focus { outline: none; border-color: #f97316; }
-        .gen-input::placeholder { color: #475569; font-weight: 500; -webkit-text-fill-color: #475569; }
-
         .btn-gen-start {
             width: 100%; background: linear-gradient(135deg, #f97316, #ff4d4d);
-            border: none; border-radius: 16px; padding: 15px;
-            color: white; font-family: 'Poppins'; font-size: 16px; font-weight: 900;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-            margin-bottom: 10px; transition: transform 0.15s;
+            border: none; border-radius: 16px; padding: 15px; color: white;
+            font-family: 'Poppins'; font-weight: 900; cursor: pointer; margin: 15px 0;
         }
-        .btn-gen-start:hover { transform: translateY(-2px); }
-        .btn-gen-start:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .btn-gen-back {
-            width: 100%; background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 12px;
-            color: #94a3b8; font-family: 'Poppins'; font-size: 13px; font-weight: 700;
-            cursor: pointer; -webkit-text-fill-color: #94a3b8;
-        }
-
-        /* Selected verb badge */
-        .gen-selected-badge {
-            display: none; align-items: center; gap: 8px;
-            background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(255,77,77,0.15));
-            border: 1px solid rgba(249,115,22,0.4);
-            border-radius: 14px; padding: 10px 14px; margin-bottom: 14px;
-        }
-        .gen-selected-badge.visible { display: flex; }
-        .gen-selected-badge-text {
-            font-size: 13px; font-weight: 800; color: white;
-            -webkit-text-fill-color: white; flex: 1;
-        }
-        .gen-selected-badge-clear {
-            font-size: 11px; color: #fb7185; -webkit-text-fill-color: #fb7185;
-            cursor: pointer; font-weight: 700;
-        }
-
-        /* Progress */
-        .gen-progress-wrap { display: none; margin-top: 16px; }
-        .gen-progress-bar-bg {
-            background: rgba(255,255,255,0.06); border-radius: 100px;
-            height: 6px; overflow: hidden; margin-bottom: 8px;
-        }
-        .gen-progress-bar-fill {
-            height: 100%; border-radius: 100px;
-            background: linear-gradient(90deg, #f97316, #ff4d4d);
-            transition: width 0.5s ease; width: 0%;
-        }
-        .gen-progress-text {
-            font-size: 12px; color: #94a3b8; text-align: center;
-            -webkit-text-fill-color: #94a3b8;
-        }
-        .gen-progress-text b { color: #38bdf8; -webkit-text-fill-color: #38bdf8; }
-        .gen-error {
-            background: rgba(251,113,133,0.1); border: 1px solid rgba(251,113,133,0.3);
-            border-radius: 12px; padding: 10px 14px; color: #fb7185;
-            font-size: 12px; margin-top: 10px; display: none;
-            -webkit-text-fill-color: #fb7185;
-        }
+        .gen-progress-wrap { display: none; margin-top: 10px; }
+        .gen-progress-bar-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 10px; overflow: hidden; }
+        .gen-progress-bar-fill { height: 100%; background: #f97316; width: 0%; transition: width 0.3s; }
     </style>
 </head>
 <body>
-<div class="v-tag">V.1.0 </div>
 
 <div id="entry-page">
-    <img src="logo.png" style="width: 80px; margin-bottom: 10px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3898/3898082.png'">
     <div class="main-title-white">5 Dakikada İngilizce</div>
     <div class="select-lesson-title">Flash Cards</div>
     <button class="btn-ai-generate" onclick="showGenerateScreen()">
@@ -370,831 +249,209 @@
     <div id="lesson-list-container"></div>
 </div>
 
-<!-- AI GENERATE SCREEN -->
 <div id="generate-screen">
     <div class="gen-box">
-        <span class="gen-title">✨ AI Ders Oluşturucu</span>
-        <span class="gen-subtitle">Listeden seç veya kendin yaz → tüm zamanlar otomatik</span>
-
-        <!-- Kategori sekmeleri -->
-        <div class="gen-tabs">
-            <div class="gen-tab active" onclick="switchGenTab('irregular')">🔥 Düzensiz</div>
-            <div class="gen-tab" onclick="switchGenTab('regular')">✅ Düzenli</div>
+        <span style="font-family:'Poppins'; font-weight:900; font-size:20px; color:#f97316">✨ AI Generator</span>
+        <div class="gen-tabs" style="margin-top:15px">
+            <div id="tab-irreg" class="gen-tab active" onclick="switchGenTab('irregular')">Düzensiz</div>
+            <div id="tab-reg" class="gen-tab" onclick="switchGenTab('regular')">Düzenli</div>
         </div>
-
-        <!-- Fiil listesi -->
         <div class="verb-grid-list" id="verbGridList"></div>
-
-        <!-- Seçilen fiil badge -->
-        <div class="gen-selected-badge" id="genSelectedBadge">
-            <span class="material-symbols-rounded" style="color:#f97316;font-size:18px">check_circle</span>
-            <span class="gen-selected-badge-text" id="genSelectedText">—</span>
-            <span class="gen-selected-badge-clear" onclick="clearVerbSelection()">✕ Temizle</span>
-        </div>
-
-        <!-- Divider -->
-        <div class="gen-divider"><span>veya kendin yaz</span></div>
-
-        <div class="gen-input-wrap">
-            <label>Fiil (V1 — Base Form)</label>
-            <input class="gen-input" type="text" id="genVerbInput"
-                placeholder="örn: sleep, jump..." autocomplete="off" spellcheck="false"
-                oninput="onManualInput()" onkeydown="if(event.key==='Enter') startGenerateLesson()">
-        </div>
-
-        <button class="btn-gen-start" id="genStartBtn" onclick="startGenerateLesson()">
-            <span class="material-symbols-rounded">bolt</span>
-            Dersi Oluştur
-        </button>
-        <button class="btn-gen-back" onclick="showHome()">← Geri Dön</button>
-
+        <input class="gen-input" type="text" id="genVerbInput" placeholder="Veya manuel yaz: örn: go">
+        <button class="btn-gen-start" onclick="startGenerateLesson()">Dersi Hazırla</button>
+        <button style="background:none; border:none; color:#94a3b8; cursor:pointer" onclick="showHome()">← Geri</button>
+        
         <div class="gen-progress-wrap" id="genProgressWrap">
-            <div class="gen-progress-bar-bg">
-                <div class="gen-progress-bar-fill" id="genProgressFill"></div>
-            </div>
-            <div class="gen-progress-text" id="genProgressText">Hazırlanıyor...</div>
+            <div class="gen-progress-bar-bg"><div class="gen-progress-bar-fill" id="genProgressFill"></div></div>
+            <div id="genProgressText" style="font-size:12px; color:#94a3b8; margin-top:5px; text-align:center">Analiz ediliyor...</div>
         </div>
-        <div class="gen-error" id="genError"></div>
     </div>
 </div>
 
 <div id="app-screen">
     <div class="top-bar">
-        <button class="nav-btn" onclick="goHome()"><span class="material-symbols-rounded">home</span> HOME</button>
-        <button id="trVoiceToggle" class="nav-btn" onclick="toggleTRVoice()">
-            <span class="material-symbols-rounded">volume_up</span> AUTO TR
-        </button>
-        <button id="shuffleToggle" class="nav-btn" onclick="toggleShuffle()"><span class="material-symbols-rounded">shuffle</span> SHUFFLE</button>
-        <button class="nav-btn" onclick="resetLesson()"><span class="material-symbols-rounded">restart_alt</span> RESET</button>
+        <button class="nav-btn" onclick="goHome()"><span class="material-symbols-rounded">home</span></button>
+        <button id="trVoiceToggle" class="nav-btn" onclick="toggleTRVoice()">AUTO TR</button>
+        <button class="nav-btn" onclick="resetLesson()">RESET</button>
     </div>
     <div class="app-box">
-        <img src="logo.png" class="app-logo-small" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3898/3898082.png'">
-        <div class="app-brand-text">5 Dakikada İngilizce</div>
-        
         <div id="lessonTitle" class="lesson-title-grad">#Lesson</div>
         <div id="lessonContent" class="lesson-content-desc"></div>
-
-        <div id="note-know" class="swipe-note">I KNOW ✅</div>
-        <div id="note-dont" class="swipe-note">I DON'T KNOW ❌</div>
-
+        <div id="note-know" class="swipe-note">BİLİYORUM ✅</div>
+        <div id="note-dont" class="swipe-note">BİLMİYORUM ❌</div>
         <div class="card-container" id="swipeArea">
-            <div class="card" id="mainCard" onclick="handleFlip(event)">
+            <div class="card" id="mainCard" onclick="handleFlip()">
                 <div class="face front" id="trDisplay">...</div>
                 <div class="face back" id="engDisplay">...</div>
             </div>
         </div>
-
         <div class="controls-row">
-            <button class="control-btn" onclick="goBack()"><span class="material-symbols-rounded">arrow_back_ios_new</span> BACK</button>
-            <button class="control-btn" onclick="goNext()">NEXT <span class="material-symbols-rounded">arrow_forward_ios</span></button>
+            <button class="control-btn" onclick="goBack()">GERİ</button>
+            <button class="control-btn" onclick="goNext()">İLERİ</button>
         </div>
-
-        <button class="btn-main" onclick="speakEN()">
-            <span class="material-symbols-rounded">record_voice_over</span> LISTEN EN
-        </button>
-        
+        <button class="btn-main" onclick="speakEN()">LISTEN EN</button>
         <div class="stats">
-            <div class="stat-item">
-                <div class="stat-label-row">ORDER <span class="material-symbols-rounded">assistant_navigation</span></div>
-                <span id="orderCount" class="stat-val">0</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label-row">REMAIN <span class="material-symbols-rounded">layers</span></div>
-                <span id="remainCount" class="stat-val">0</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label-row">LEARNED <span class="material-symbols-rounded" style="color:var(--secondary)">task_alt</span></div>
-                <span id="correctCount" class="stat-val" style="color:var(--secondary)">0</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label-row">UNKNOWN <span class="material-symbols-rounded" style="color:var(--accent)">cancel</span></div>
-                <span id="wrongCount" class="stat-val" style="color:var(--accent)">0</span>
-            </div>
+            <div class="stat-item"><span class="stat-label-row">KALAN</span><span id="remainCount" class="stat-val">0</span></div>
+            <div class="stat-item"><span class="stat-label-row">BİLİNEN</span><span id="correctCount" class="stat-val" style="color:var(--secondary)">0</span></div>
         </div>
     </div>
 </div>
 
 <script>
-let cards = [], totalInLesson = 0, learned = 0, wrong = 0, startY = 0, currentY = 0, isDragging = false, hasMoved = false;
-let activeLesson = null;
-let originalData = [];
-let autoTRVoice = localStorage.getItem('auto_tr_voice') === 'true';
-let shuffleMode = false;
-let shuffleQueue = []; // shuffle modunda kalan kartlar (her biri 1 kez)
-
-let audioCtx = null;
-let pendingSound = null;
-
-function _createAudioCtx() {
-    if (!audioCtx) {
-        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+// --- VERİ TABANI ---
+const VERB_DB = {
+    irregular: {
+        "go": { v2: "went", v3: "gone", tr: "Gitmek" },
+        "do": { v2: "did", v3: "done", tr: "Yapmak" },
+        "have": { v2: "had", v3: "had", tr: "Sahip olmak" },
+        "eat": { v2: "ate", v3: "eaten", tr: "Yemek yemek" },
+        "see": { v2: "saw", v3: "seen", tr: "Görmek" },
+        "come": { v2: "came", v3: "come", tr: "Gelmek" },
+        "sleep": { v2: "slept", v3: "slept", tr: "Uyumak" },
+        "buy": { v2: "bought", v3: "bought", tr: "Satın almak" }
+    },
+    regular: {
+        "study": { tr: "Ders çalışmak" },
+        "work": { tr: "Çalışmak" },
+        "clean": { tr: "Temizlemek" },
+        "wash": { tr: "Yıkamak" },
+        "play": { tr: "Oynamak" },
+        "walk": { tr: "Yürümek" }
     }
-    return audioCtx;
-}
+};
 
-function _playSound(type) {
-    if (!audioCtx) return;
-    try {
-        const g = audioCtx.createGain();
-        const o = audioCtx.createOscillator();
-        o.connect(g); g.connect(audioCtx.destination);
-        const t = audioCtx.currentTime;
-        if (type === 'up') {
-            o.frequency.setValueAtTime(523, t);
-            o.frequency.exponentialRampToValueAtTime(1047, t + 0.12);
-            g.gain.setValueAtTime(0.5, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-            o.start(t); o.stop(t + 0.18);
-        } else {
-            o.frequency.setValueAtTime(400, t);
-            o.frequency.exponentialRampToValueAtTime(200, t + 0.18);
-            g.gain.setValueAtTime(0.5, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
-            o.start(t); o.stop(t + 0.22);
+let cards = [], learned = 0, wrong = 0, currentLesson = null;
+let activeTab = 'irregular';
+
+// --- ANA SAYFA DERSLERİ ---
+function renderHome() {
+    const container = document.getElementById('lesson-list-container');
+    container.innerHTML = "";
+    // Varsayılan ders
+    const defaultLessons = [{ name: "Begginer", subTitle: "Temel Fiiller" }];
+    
+    // LocalStorage'dan AI derslerini çek
+    Object.keys(localStorage).forEach(key => {
+        if(key.startsWith('ai_lesson_')) {
+            const name = key.replace('ai_lesson_', '');
+            defaultLessons.push({ name: name, subTitle: "AI Generated", isAI: true });
         }
-    } catch(e) {}
+    });
+
+    defaultLessons.forEach(l => {
+        const div = document.createElement('div');
+        div.className = "lesson-card";
+        div.onclick = () => startLesson(l);
+        div.innerHTML = `<h3>${l.name}</h3><p>${l.subTitle}</p>`;
+        container.appendChild(div);
+    });
 }
 
-function _onTouchStartAudio() {
-    _createAudioCtx();
-    if (!audioCtx) return;
-    try {
-        const buf = audioCtx.createBuffer(1, 1, 22050);
-        const src = audioCtx.createBufferSource();
-        src.buffer = buf; src.connect(audioCtx.destination); src.start(0);
-    } catch(e) {}
-    if (pendingSound) { _playSound(pendingSound); pendingSound = null; }
+function showGenerateScreen() {
+    document.getElementById('entry-page').style.display = 'none';
+    document.getElementById('generate-screen').style.display = 'flex';
+    switchGenTab('irregular');
 }
 
-document.addEventListener('touchstart', _onTouchStartAudio, { passive: true });
-document.addEventListener('mousedown', () => {
-    _createAudioCtx();
-    if (pendingSound && audioCtx) { _playSound(pendingSound); pendingSound = null; }
-}, { passive: true });
-
-function playSwipeSound(type) {
-    if (audioCtx && audioCtx.state === 'running') { _playSound(type); }
-    else { pendingSound = type; }
+function showHome() {
+    document.getElementById('generate-screen').style.display = 'none';
+    document.getElementById('app-screen').style.display = 'none';
+    document.getElementById('entry-page').style.display = 'flex';
+    renderHome();
 }
 
-function initAudio() { _createAudioCtx(); }
-
-
-
-if(autoTRVoice) document.getElementById('trVoiceToggle').classList.add('active');
-
-function toggleTRVoice() {
-    autoTRVoice = !autoTRVoice;
-    localStorage.setItem('auto_tr_voice', autoTRVoice);
-    const btn = document.getElementById('trVoiceToggle');
-    if(autoTRVoice) {
-        btn.classList.add('active');
-        speakTR();
-    } else {
-        btn.classList.remove('active');
-        window.speechSynthesis.cancel();
-    }
+function switchGenTab(tab) {
+    activeTab = tab;
+    document.getElementById('tab-irreg').classList.toggle('active', tab==='irregular');
+    document.getElementById('tab-reg').classList.toggle('active', tab==='regular');
+    
+    const grid = document.getElementById('verbGridList');
+    grid.innerHTML = "";
+    Object.keys(VERB_DB[tab]).forEach(v => {
+        const chip = document.createElement('div');
+        chip.className = "verb-chip";
+        chip.onclick = () => { document.getElementById('genVerbInput').value = v; };
+        chip.innerHTML = `<span class="v-en">${v}</span><span class="v-tr">${VERB_DB[tab][v].tr}</span>`;
+        grid.appendChild(chip);
+    });
 }
 
-function speakTR() {
-    if(!cards.length || !autoTRVoice) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(cards[0].tr);
-    u.lang = 'tr-TR';
-    u.rate = 1.0;
-    window.speechSynthesis.speak(u);
+function startGenerateLesson() {
+    const verb = document.getElementById('genVerbInput').value.trim().toLowerCase();
+    if(!verb) return alert("Fiil seç!");
+
+    const wrap = document.getElementById('genProgressWrap');
+    const fill = document.getElementById('genProgressFill');
+    wrap.style.display = 'block';
+    
+    let p = 0;
+    const inv = setInterval(() => {
+        p += 10;
+        fill.style.width = p + "%";
+        if(p >= 100) {
+            clearInterval(inv);
+            finalizeAI(verb);
+        }
+    }, 100);
 }
+
+function finalizeAI(v) {
+    let info = VERB_DB.irregular[v] || VERB_DB.regular[v];
+    const v1 = v;
+    const v2 = info?.v2 || (v1.endsWith('e') ? v1+'d' : v1+'ed');
+    const v3 = info?.v3 || v2;
+    const tr = info?.tr || "Eylem";
+
+    const aiCards = [
+        { tr: `${tr} (V1-V2-V3)`, en: `${v1} - ${v2} - ${v3}` },
+        { tr: `Her gün ${tr.toLowerCase()} yaparım.`, en: `I ${v1} every day.` },
+        { tr: `Dün ${tr.toLowerCase()} yaptım.`, en: `I ${v2} yesterday.` },
+        { tr: `${tr.toLowerCase()} yapabilirim.`, en: `I can ${v1}.` },
+        { tr: `Lütfen ${tr.toLowerCase()} yapma.`, en: `Please don't ${v1}.` }
+    ];
+
+    localStorage.setItem(`ai_lesson_${v.toUpperCase()}`, JSON.stringify(aiCards));
+    showHome();
+}
+
+// --- DERS SİSTEMİ ---
+function startLesson(lesson) {
+    currentLesson = lesson;
+    const data = localStorage.getItem(`ai_lesson_${lesson.name}`);
+    cards = data ? JSON.parse(data) : [
+        { tr: "Gitmek", en: "Go" },
+        { tr: "Gelmek", en: "Come" }
+    ];
+    learned = 0;
+    document.getElementById('entry-page').style.display = 'none';
+    document.getElementById('app-screen').style.display = 'flex';
+    document.getElementById('lessonTitle').innerText = lesson.name;
+    showCard();
+}
+
+function showCard() {
+    if(cards.length === 0) { alert("Tebrikler!"); return showHome(); }
+    document.getElementById('mainCard').classList.remove('flipped');
+    document.getElementById('trDisplay').innerText = cards[0].tr;
+    document.getElementById('engDisplay').innerText = cards[0].en;
+    document.getElementById('remainCount').innerText = cards.length;
+    document.getElementById('correctCount').innerText = learned;
+}
+
+function handleFlip() { document.getElementById('mainCard').classList.toggle('flipped'); }
+function goNext() { cards.push(cards.shift()); showCard(); }
+function goBack() { cards.unshift(cards.pop()); showCard(); }
 
 function speakEN() {
-    if(!cards.length) return;
-    window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(cards[0].en);
     u.lang = 'en-US';
     window.speechSynthesis.speak(u);
 }
 
-function toggleShuffle() {
-    shuffleMode = !shuffleMode;
-    const btn = document.getElementById('shuffleToggle');
-    if (shuffleMode) {
-        btn.classList.add('active');
-        // Mevcut kartları karıştır, her biri 1 kez gelecek
-        shuffleQueue = [...cards].sort(() => Math.random() - 0.5);
-        cards = [...shuffleQueue];
-    } else {
-        btn.classList.remove('active');
-        // Normal sıralamaya dön - originalData sırasına göre kalan kartları sırala
-        const remaining = new Set(cards.map(c => c.tr));
-        cards = originalData.filter(c => remaining.has(c.tr));
-        shuffleQueue = [];
-    }
-    show();
-}
+function goHome() { showHome(); }
 
-function show() {
-    if(cards.length === 0) { 
-        alert("Lesson completed!"); 
-        localStorage.removeItem(`lesson_progress_${activeLesson.name}`); 
-        goHome(); 
-        return; 
-    }
-    mainCard.classList.remove('flipped');
-    mainCard.style.cssText = "top: 0; opacity: 1; transform: rotateY(0deg);";
-    document.getElementById('trDisplay').innerText = cards[0].tr;
-    document.getElementById('engDisplay').innerText = cards[0].en;
-    document.getElementById('remainCount').innerText = cards.length;
-    document.getElementById('correctCount').innerText = learned;
-    document.getElementById('wrongCount').innerText = wrong;
-    if (shuffleMode) {
-        // Shuffle modda: shuffle sırasındaki pozisyon göster (toplam shuffle uzunluğuna göre)
-        const shufflePos = shuffleQueue.length - cards.length + 1;
-        document.getElementById('orderCount').innerText = shufflePos + '/' + shuffleQueue.length;
-    } else {
-        const currentCardTr = cards[0].tr;
-        const originalIndex = originalData.findIndex(c => c.tr === currentCardTr);
-        document.getElementById('orderCount').innerText = (originalIndex + 1);
-    }
-    if(autoTRVoice) { setTimeout(speakTR, 300); }
-}
-
-function handleFlip(event) {
-    if (hasMoved) return;
-    const card = document.getElementById('mainCard');
-    card.classList.toggle('flipped');
-    let rotY = card.classList.contains('flipped') ? 180 : 0;
-    card.style.transform = `rotateY(${rotY}deg)`;
-}
-
-const area = document.getElementById('swipeArea');
-const mainCard = document.getElementById('mainCard');
-
-const startAction = (y) => { 
-    initAudio(); 
-    startY = y; 
-    isDragging = true; 
-    hasMoved = false; 
-    mainCard.style.transition = "none"; 
-};
-
-const moveAction = (y) => {
-    if (!isDragging) return;
-    currentY = y - startY;
-    if (Math.abs(currentY) > 10) hasMoved = true;
-    let rotY = mainCard.classList.contains('flipped') ? 180 : 0;
-    mainCard.style.top = currentY + "px";
-    mainCard.style.transform = `rotateY(${rotY}deg) rotateX(${-currentY/20}deg)`;
-    if(currentY < -50) document.getElementById('note-know').style.opacity = "1";
-    else if(currentY > 50) document.getElementById('note-dont').style.opacity = "1";
-    else { 
-        document.getElementById('note-know').style.opacity = "0"; 
-        document.getElementById('note-dont').style.opacity = "0"; 
-    }
-};
-
-const endAction = () => {
-    if (!isDragging) return;
-    isDragging = false;
-    if (hasMoved) {
-        mainCard.style.transition = "0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-        if(currentY < -120) handleChoice(true);
-        else if(currentY > 120) handleChoice(false);
-        else resetCard();
-    }
-    document.getElementById('note-know').style.opacity = "0";
-    document.getElementById('note-dont').style.opacity = "0";
-    currentY = 0;
-};
-
-area.addEventListener('touchstart', (e) => startAction(e.touches[0].clientY), {passive: true});
-area.addEventListener('touchmove', (e) => moveAction(e.touches[0].clientY), {passive: true});
-area.addEventListener('touchend', endAction);
-area.onmousedown = (e) => startAction(e.clientY);
-window.onmousemove = (e) => moveAction(e.clientY);
-window.onmouseup = endAction;
-
-function handleChoice(isCorrect) {
-    if(isCorrect) { 
-        playSwipeSound('up');
-        mainCard.style.top = "-1000px"; 
-        mainCard.style.opacity = "0"; 
-        setTimeout(() => { 
-            learned++; 
-            cards.shift(); 
-            saveProgress(); 
-            show(); 
-        }, 200); 
-    }
-    else { 
-        playSwipeSound('down');
-        mainCard.style.top = "1000px"; 
-        mainCard.style.opacity = "0"; 
-        setTimeout(() => { 
-            wrong++; 
-            if (shuffleMode) {
-                // Shuffle modda: bilinmeyen kart sona değil, rastgele bir yere eklenir
-                // ama shuffleQueue'ya geri eklenmez (her kart 1 kez gelir kuralı korunur)
-                // Bunun yerine: kartı queue'nun rastgele ortasına yerleştir ama toplam sayıyı koru
-                const removed = cards.shift();
-                const insertAt = Math.floor(Math.random() * Math.max(1, cards.length)) + 1;
-                cards.splice(insertAt, 0, removed);
-            } else {
-                cards.push(cards.shift()); 
-            }
-            saveProgress(); 
-            show(); 
-        }, 200); 
-    }
-}
-
-function resetCard() { 
-    let rotY = mainCard.classList.contains('flipped') ? 180 : 0; 
-    mainCard.style.top = "0"; 
-    mainCard.style.transform = `rotateY(${rotY}deg)`; 
-}
-
-function goNext() { if(cards.length < 2) return; cards.push(cards.shift()); show(); }
-function goBack() { if(cards.length < 2) return; cards.unshift(cards.pop()); show(); }
-function goHome() { 
-    saveProgress(); 
-    document.getElementById('app-screen').style.display = 'none'; 
-    document.getElementById('entry-page').style.display = 'flex'; 
-}
-
-function saveProgress() { 
-    if (activeLesson && cards.length > 0) {
-        localStorage.setItem(`lesson_progress_${activeLesson.name}`, JSON.stringify({cards, learned, wrong})); 
-    }
-}
-
-function resetLesson() { 
-    if(confirm("Reset?")) { 
-        localStorage.removeItem(`lesson_progress_${activeLesson.name}`); 
-        loadLesson(activeLesson); 
-    } 
-}
-
-function loadLesson(lesson) {
-    initAudio(); 
-    activeLesson = lesson;
-    shuffleMode = false;
-    shuffleQueue = [];
-    fetch(lesson.file).then(res => res.json()).then(data => {
-        originalData = data;
-        totalInLesson = data.length;
-        const saved = localStorage.getItem(`lesson_progress_${lesson.name}`);
-        if (saved) { 
-            const p = JSON.parse(saved); 
-            cards = p.cards; 
-            learned = p.learned; 
-            wrong = p.wrong; 
-        }
-        else { cards = [...data]; learned = 0; wrong = 0; }
-        document.getElementById('lessonTitle').innerText = lesson.name;
-        document.getElementById('lessonContent').innerText = lesson.subTitle || "";
-        document.getElementById('entry-page').style.display = 'none';
-        document.getElementById('app-screen').style.display = 'flex';
-        document.getElementById('shuffleToggle').classList.remove('active');
-        show();
-    });
-}
-
-// =====================================================
-// FİİL LİSTESİ
-// =====================================================
-const VERB_LIST = {
-  irregular: [
-    {v1:"go",v2:"went",v3:"gone",tr:"gitmek"},
-    {v1:"do",v2:"did",v3:"done",tr:"yapmak"},
-    {v1:"be",v2:"was/were",v3:"been",tr:"olmak"},
-    {v1:"have",v2:"had",v3:"had",tr:"sahip olmak"},
-    {v1:"make",v2:"made",v3:"made",tr:"yapmak"},
-    {v1:"meet",v2:"met",v3:"met",tr:"buluşmak"},
-    {v1:"come",v2:"came",v3:"come",tr:"gelmek"},
-    {v1:"become",v2:"became",v3:"become",tr:"dönüşmek"},
-    {v1:"run",v2:"ran",v3:"run",tr:"koşmak"},
-    {v1:"win",v2:"won",v3:"won",tr:"kazanmak"},
-    {v1:"read",v2:"read",v3:"read",tr:"okumak"},
-    {v1:"say",v2:"said",v3:"said",tr:"söylemek"},
-    {v1:"pay",v2:"paid",v3:"paid",tr:"ödemek"},
-    {v1:"tell",v2:"told",v3:"told",tr:"anlatmak"},
-    {v1:"sell",v2:"sold",v3:"sold",tr:"satmak"},
-    {v1:"lose",v2:"lost",v3:"lost",tr:"kaybetmek"},
-    {v1:"sleep",v2:"slept",v3:"slept",tr:"uyumak"},
-    {v1:"feel",v2:"felt",v3:"felt",tr:"hissetmek"},
-    {v1:"keep",v2:"kept",v3:"kept",tr:"tutmak"},
-    {v1:"send",v2:"sent",v3:"sent",tr:"göndermek"},
-    {v1:"hold",v2:"held",v3:"held",tr:"tutmak"},
-    {v1:"spend",v2:"spent",v3:"spent",tr:"harcamak"},
-    {v1:"learn",v2:"learnt",v3:"learnt",tr:"öğrenmek"},
-    {v1:"leave",v2:"left",v3:"left",tr:"ayrılmak"},
-    {v1:"build",v2:"built",v3:"built",tr:"inşa etmek"},
-    {v1:"hear",v2:"heard",v3:"heard",tr:"duymak"},
-    {v1:"speak",v2:"spoke",v3:"spoken",tr:"konuşmak"},
-    {v1:"wake up",v2:"woke up",v3:"woken up",tr:"uyanmak"},
-    {v1:"get",v2:"got",v3:"gotten",tr:"almak"},
-    {v1:"get on",v2:"got on",v3:"gotten on",tr:"binmek"},
-    {v1:"get off",v2:"got off",v3:"gotten off",tr:"inmek"},
-    {v1:"forget",v2:"forgot",v3:"forgotten",tr:"unutmak"},
-    {v1:"shake",v2:"shook",v3:"shaken",tr:"sallamak"},
-    {v1:"choose",v2:"chose",v3:"chosen",tr:"seçmek"},
-    {v1:"break",v2:"broke",v3:"broken",tr:"kırmak"},
-    {v1:"give",v2:"gave",v3:"given",tr:"vermek"},
-    {v1:"give up",v2:"gave up",v3:"given up",tr:"vazgeçmek"},
-    {v1:"drive",v2:"drove",v3:"driven",tr:"araba sürmek"},
-    {v1:"ride",v2:"rode",v3:"ridden",tr:"bisiklet sürmek"},
-    {v1:"write",v2:"wrote",v3:"written",tr:"yazmak"},
-    {v1:"hide",v2:"hid",v3:"hidden",tr:"saklanmak"},
-    {v1:"fall",v2:"fell",v3:"fallen",tr:"düşmek"},
-    {v1:"eat",v2:"ate",v3:"eaten",tr:"yemek"},
-    {v1:"take",v2:"took",v3:"taken",tr:"almak"},
-    {v1:"take off",v2:"took off",v3:"taken off",tr:"çıkartmak"},
-    {v1:"wear",v2:"wore",v3:"worn",tr:"giymek"},
-    {v1:"know",v2:"knew",v3:"known",tr:"bilmek"},
-    {v1:"fly",v2:"flew",v3:"flown",tr:"uçmak"},
-    {v1:"blow",v2:"blew",v3:"blown",tr:"üflemek"},
-    {v1:"draw",v2:"drew",v3:"drawn",tr:"çizmek"},
-    {v1:"grow",v2:"grew",v3:"grown",tr:"büyümek"},
-    {v1:"throw",v2:"threw",v3:"thrown",tr:"fırlatmak"},
-    {v1:"show",v2:"showed",v3:"shown",tr:"göstermek"},
-    {v1:"see",v2:"saw",v3:"seen",tr:"görmek"},
-    {v1:"begin",v2:"began",v3:"begun",tr:"başlamak"},
-    {v1:"sing",v2:"sang",v3:"sung",tr:"şarkı söylemek"},
-    {v1:"ring",v2:"rang",v3:"rung",tr:"zil çalmak"},
-    {v1:"drink",v2:"drank",v3:"drunk",tr:"içmek"},
-    {v1:"swim",v2:"swam",v3:"swum",tr:"yüzmek"},
-    {v1:"sit",v2:"sat",v3:"sat",tr:"oturmak"},
-    {v1:"stand",v2:"stood",v3:"stood",tr:"kalkmak"},
-    {v1:"understand",v2:"understood",v3:"understood",tr:"anlamak"},
-    {v1:"find",v2:"found",v3:"found",tr:"bulmak"},
-    {v1:"bring",v2:"brought",v3:"brought",tr:"getirmek"},
-    {v1:"buy",v2:"bought",v3:"bought",tr:"satın almak"},
-    {v1:"teach",v2:"taught",v3:"taught",tr:"öğretmek"},
-    {v1:"think",v2:"thought",v3:"thought",tr:"düşünmek"},
-    {v1:"fight",v2:"fought",v3:"fought",tr:"kavga etmek"},
-    {v1:"catch",v2:"caught",v3:"caught",tr:"yakalamak"},
-    {v1:"cut",v2:"cut",v3:"cut",tr:"kesmek"},
-    {v1:"let",v2:"let",v3:"let",tr:"izin vermek"},
-    {v1:"set",v2:"set",v3:"set",tr:"kurmak"},
-    {v1:"hit",v2:"hit",v3:"hit",tr:"vurmak"},
-    {v1:"put",v2:"put",v3:"put",tr:"koymak"},
-    {v1:"hurt",v2:"hurt",v3:"hurt",tr:"incitmek"},
-    {v1:"put on",v2:"put on",v3:"put on",tr:"giymek"},
-    {v1:"put off",v2:"put off",v3:"put off",tr:"ertelemek"},
-    {v1:"quit",v2:"quit",v3:"quit",tr:"bırakmak"},
-    {v1:"shut",v2:"shut",v3:"shut",tr:"kapatmak"},
-  ],
-  regular: [
-    {v1:"study",v2:"studied",v3:"studied",tr:"ders çalışmak"},
-    {v1:"cry",v2:"cried",v3:"cried",tr:"ağlamak"},
-    {v1:"try",v2:"tried",v3:"tried",tr:"denemek"},
-    {v1:"carry",v2:"carried",v3:"carried",tr:"taşımak"},
-    {v1:"marry",v2:"married",v3:"married",tr:"evlenmek"},
-    {v1:"want",v2:"wanted",v3:"wanted",tr:"istemek"},
-    {v1:"talk",v2:"talked",v3:"talked",tr:"konuşmak"},
-    {v1:"ask",v2:"asked",v3:"asked",tr:"sormak"},
-    {v1:"answer",v2:"answered",v3:"answered",tr:"yanıtlamak"},
-    {v1:"work",v2:"worked",v3:"worked",tr:"çalışmak"},
-    {v1:"start",v2:"started",v3:"started",tr:"başlamak"},
-    {v1:"finish",v2:"finished",v3:"finished",tr:"bitirmek"},
-    {v1:"look",v2:"looked",v3:"looked",tr:"bakmak"},
-    {v1:"watch",v2:"watched",v3:"watched",tr:"izlemek"},
-    {v1:"listen",v2:"listened",v3:"listened",tr:"dinlemek"},
-    {v1:"play",v2:"played",v3:"played",tr:"oynamak"},
-    {v1:"walk",v2:"walked",v3:"walked",tr:"yürümek"},
-    {v1:"turn",v2:"turned",v3:"turned",tr:"dönmek"},
-    {v1:"turn on",v2:"turned on",v3:"turned on",tr:"açmak"},
-    {v1:"turn off",v2:"turned off",v3:"turned off",tr:"kapatmak"},
-    {v1:"clean",v2:"cleaned",v3:"cleaned",tr:"temizlemek"},
-    {v1:"wash",v2:"washed",v3:"washed",tr:"yıkamak"},
-    {v1:"call",v2:"called",v3:"called",tr:"aramak"},
-    {v1:"laugh",v2:"laughed",v3:"laughed",tr:"gülmek"},
-    {v1:"open",v2:"opened",v3:"opened",tr:"açmak"},
-    {v1:"cook",v2:"cooked",v3:"cooked",tr:"pişirmek"},
-    {v1:"push",v2:"pushed",v3:"pushed",tr:"itmek"},
-    {v1:"pull",v2:"pulled",v3:"pulled",tr:"çekmek"},
-    {v1:"fill",v2:"filled",v3:"filled",tr:"doldurmak"},
-    {v1:"offer",v2:"offered",v3:"offered",tr:"teklif etmek"},
-    {v1:"suggest",v2:"suggested",v3:"suggested",tr:"önermek"},
-    {v1:"allow",v2:"allowed",v3:"allowed",tr:"izin vermek"},
-    {v1:"accept",v2:"accepted",v3:"accepted",tr:"kabul etmek"},
-    {v1:"enjoy",v2:"enjoyed",v3:"enjoyed",tr:"eğlenmek"},
-    {v1:"remember",v2:"remembered",v3:"remembered",tr:"hatırlamak"},
-    {v1:"visit",v2:"visited",v3:"visited",tr:"ziyaret etmek"},
-    {v1:"wait",v2:"waited",v3:"waited",tr:"beklemek"},
-    {v1:"help",v2:"helped",v3:"helped",tr:"yardım etmek"},
-    {v1:"fix",v2:"fixed",v3:"fixed",tr:"tamir etmek"},
-    {v1:"protect",v2:"protected",v3:"protected",tr:"korumak"},
-    {v1:"stop",v2:"stopped",v3:"stopped",tr:"durmak"},
-    {v1:"plan",v2:"planned",v3:"planned",tr:"planlamak"},
-    {v1:"travel",v2:"travelled",v3:"travelled",tr:"seyahat etmek"},
-    {v1:"prefer",v2:"preferred",v3:"preferred",tr:"tercih etmek"},
-    {v1:"continue",v2:"continued",v3:"continued",tr:"devam etmek"},
-    {v1:"arrive",v2:"arrived",v3:"arrived",tr:"varmak"},
-    {v1:"use",v2:"used",v3:"used",tr:"kullanmak"},
-    {v1:"live",v2:"lived",v3:"lived",tr:"yaşamak"},
-    {v1:"die",v2:"died",v3:"died",tr:"ölmek"},
-    {v1:"smile",v2:"smiled",v3:"smiled",tr:"gülümsemek"},
-    {v1:"close",v2:"closed",v3:"closed",tr:"kapatmak"},
-    {v1:"believe",v2:"believed",v3:"believed",tr:"inanmak"},
-    {v1:"hope",v2:"hoped",v3:"hoped",tr:"ummak"},
-    {v1:"promise",v2:"promised",v3:"promised",tr:"söz vermek"},
-    {v1:"move",v2:"moved",v3:"moved",tr:"taşınmak"},
-    {v1:"change",v2:"changed",v3:"changed",tr:"değiştirmek"},
-    {v1:"decide",v2:"decided",v3:"decided",tr:"karar vermek"},
-    {v1:"agree",v2:"agreed",v3:"agreed",tr:"anlaşmak"},
-    {v1:"love",v2:"loved",v3:"loved",tr:"sevmek"},
-    {v1:"like",v2:"liked",v3:"liked",tr:"hoşlanmak"},
-    {v1:"hate",v2:"hated",v3:"hated",tr:"nefret etmek"},
-    {v1:"graduate",v2:"graduated",v3:"graduated",tr:"mezun olmak"},
-    {v1:"share",v2:"shared",v3:"shared",tr:"paylaşmak"},
-    {v1:"save",v2:"saved",v3:"saved",tr:"kurtarmak"},
-    {v1:"solve",v2:"solved",v3:"solved",tr:"çözmek"},
-    {v1:"miss",v2:"missed",v3:"missed",tr:"özlemek"},
-    {v1:"explain",v2:"explained",v3:"explained",tr:"açıklamak"},
-    {v1:"prepare",v2:"prepared",v3:"prepared",tr:"hazırlamak"},
-    {v1:"create",v2:"created",v3:"created",tr:"yaratmak"},
-    {v1:"produce",v2:"produced",v3:"produced",tr:"üretmek"},
-    {v1:"escape",v2:"escaped",v3:"escaped",tr:"kaçmak"},
-  ]
-};
-
-let selectedVerbObj = null;
-let currentGenTab = 'irregular';
-
-function switchGenTab(tab) {
-  currentGenTab = tab;
-  document.querySelectorAll('.gen-tab').forEach((el, i) => {
-    el.classList.toggle('active', (i===0 && tab==='irregular') || (i===1 && tab==='regular'));
-  });
-  renderVerbGrid();
-}
-
-function renderVerbGrid() {
-  const grid = document.getElementById('verbGridList');
-  const list = VERB_LIST[currentGenTab];
-  grid.innerHTML = '';
-  list.forEach(verb => {
-    const div = document.createElement('div');
-    div.className = 'verb-chip' + (selectedVerbObj && selectedVerbObj.v1===verb.v1 ? ' selected' : '');
-    div.innerHTML = `<span class="verb-chip-v1">${verb.v1}</span><span class="verb-chip-tr">${verb.tr}</span>`;
-    div.onclick = () => selectVerb(verb);
-    grid.appendChild(div);
-  });
-}
-
-function selectVerb(verb) {
-  selectedVerbObj = verb;
-  document.getElementById('genVerbInput').value = '';
-  document.getElementById('genSelectedText').textContent = `${verb.v1} / ${verb.v2} / ${verb.v3} — ${verb.tr}`;
-  document.getElementById('genSelectedBadge').classList.add('visible');
-  renderVerbGrid();
-}
-
-function clearVerbSelection() {
-  selectedVerbObj = null;
-  document.getElementById('genSelectedBadge').classList.remove('visible');
-  renderVerbGrid();
-}
-
-function onManualInput() {
-  if (document.getElementById('genVerbInput').value.trim()) {
-    selectedVerbObj = null;
-    document.getElementById('genSelectedBadge').classList.remove('visible');
-    renderVerbGrid();
-  }
-}
-
-// =====================================================
-
-// Şablon cümleler — {V1} {V2} {V3} {VING} placeholder
-const VERB_TEMPLATES = [
-  "I {V1}","I am {VING}","I was {VING}","I {V2}",
-  "I have just {V3}","I had {V3}","I will {V1}","I can {V1}",
-  "You may {V1}","We might {V1}","I could {V1}","I should {V1}",
-  "He would {V1}","I must {V1}","I have to {V1}","I need to {V1}",
-  "I don't {V1}","I am not {VING}","I wasn't {VING}","I didn't {V1}",
-  "I haven't {V3} before","I hadn't {V3}","I won't {V1}","I can't {V1}",
-  "You may not {V1}","We might not {V1}","I couldn't {V1}","I shouldn't {V1}",
-  "He wouldn't {V1}","You mustn't {V1}","I don't have to {V1}","You don't need to {V1}",
-  "Do you {V1}?","Are you {VING}?","Were you {VING}?","Did you {V1}?",
-  "Have you {V3} before?","Had you {V3}?","Will you {V1}?","Can you {V1}?",
-  "May I {V1}?","Might we {V1}?","Could you {V1}?","Should I {V1}?",
-  "Would he {V1}?","Must I {V1}?","Do you have to {V1}?","Do you need to {V1}?",
-  "Don't you {V1}?","Aren't you {VING}?","Weren't you {VING}?","Didn't you {V1}?",
-  "Haven't you just {V3}?","Hadn't you {V3}?","Won't you {V1}?","Can't you {V1}?",
-  "Couldn't you {V1}?","Shouldn't I {V1}?","Wouldn't he {V1}?","Mustn't I {V1}?",
-  "Don't you have to {V1}?","Don't you need to {V1}?",
-  "Why do you {V1}?","Why are you {VING}?","Why were you {VING}?","Why did you {V1}?",
-  "Why have you just {V3}?","Why had you {V3}?","Why will you {V1}?",
-  "Why can they {V1}?","Why should they {V1}?","Why would he {V1}?",
-  "Why must you {V1}?","Why do you have to {V1}?","Why do you need to {V1}?",
-  "Why don't we {V1}?","Why aren't we {VING}?","Why weren't they {VING}?","Why didn't we {V1}?",
-  "Why haven't they {V3} yet?","Why hadn't they {V3}?","Why won't they {V1}?",
-  "Why can't we {V1}?","Why couldn't they {V1}?","Why shouldn't they {V1}?",
-  "Why wouldn't he {V1}?","Why mustn't he {V1}?",
-  "Why don't we have to {V1}?","Why don't we need to {V1}?",
-  "Where do you {V1}?","Where are you {VING}?","Where were you {VING}?","Where did you {V1}?",
-  "Where have you just {V3}?","Where had you {V3}?","Where will you {V1}?",
-  "Where can I {V1}?","Where may I {V1}?","Where could we {V1}?",
-  "Where should we {V1}?","Where would he {V1}?","Where must he {V1}?",
-  "Where do you have to {V1}?","Where do you need to {V1}?",
-  "When do you {V1}?","When are you {VING}?","When were you {VING}?","When did you {V1}?",
-  "When have you {V3}?","When had you {V3}?","When will you {V1}?",
-  "When can you {V1}?","When may she {V1}?","When could you {V1}?",
-  "When should I {V1}?","When would you {V1}?","When must we {V1}?",
-  "When do we have to {V1}?","When do we need to {V1}?",
-  "What time do you {V1}?","What time are you {VING}?","What time were you {VING}?",
-  "What time did you {V1}?","What time have you {V3}?","What time had you {V3}?",
-  "What time will we {V1}?","What time can we {V1}?","What time may I {V1}?",
-  "What time could you {V1}?","What time should you {V1}?","What time would you {V1}?",
-  "What time must you {V1}?","What time do you have to {V1}?","What time do you need to {V1}?",
-  "How do you {V1}?","How are you {VING}?","How were you {VING}?","How did you {V1}?",
-  "How have you {V3} before?","How had you {V3}?","How will you {V1}?",
-  "How can I {V1}?","How may I {V1}?","How could I {V1}?",
-  "How should I {V1}?","How would you {V1}?","How must I {V1}?",
-  "How do they have to {V1}?","How do they need to {V1}?",
-  "How often do you {V1}?","How often are you {VING}?","How often were you {VING}?",
-  "How often did you {V1}?","How often have you {V3} before?","How often had you {V3}?",
-  "How often will you {V1}?","How often can you {V1}?","How often may I {V1}?",
-  "How often could you {V1}?","How often should I {V1}?","How often would you {V1}?",
-  "How often must I {V1}?","How often do you have to {V1}?","How often do you need to {V1}?"
-];
-
-function makeIngForm(v1) {
-  v1 = v1.trim().toLowerCase();
-  if (v1.endsWith('ie')) return v1.slice(0,-2)+'ying';
-  if (v1.endsWith('e') && !v1.endsWith('ee') && !v1.endsWith('oe')) return v1.slice(0,-1)+'ing';
-  const vowels='aeiou';
-  if (v1.length>=3 && !vowels.includes(v1.slice(-1)) && vowels.includes(v1.slice(-2,-1)) && !vowels.includes(v1.slice(-3,-2)))
-    return v1+v1.slice(-1)+'ing';
-  return v1+'ing';
-}
-
-function showHome() {
-  document.getElementById('generate-screen').style.display = 'none';
-  document.getElementById('entry-page').style.display = 'flex';
-}
-
-function showGenerateScreen() {
-  document.getElementById('entry-page').style.display = 'none';
-  document.getElementById('generate-screen').style.display = 'flex';
-  document.getElementById('genError').style.display = 'none';
-  document.getElementById('genProgressWrap').style.display = 'none';
-  document.getElementById('genStartBtn').disabled = false;
-  selectedVerbObj = null;
-  document.getElementById('genSelectedBadge').classList.remove('visible');
-  document.getElementById('genVerbInput').value = '';
-  renderVerbGrid();
-}
-
-function setGenProgress(pct, html) {
-  document.getElementById('genProgressFill').style.width = pct + '%';
-  document.getElementById('genProgressText').innerHTML = html;
-}
-
-async function startGenerateLesson() {
-  document.getElementById('genError').style.display = 'none';
-
-  let v1, v2, v3, ving;
-
-  if (selectedVerbObj) {
-    // Listeden seçildi — formlar hazır
-    v1 = selectedVerbObj.v1;
-    v2 = selectedVerbObj.v2;
-    v3 = selectedVerbObj.v3;
-    const baseWord = v1.split(' ')[0];
-    ving = (v1 === 'be') ? 'being' : makeIngForm(baseWord);
-    // Phrasal verb ise ving'e geri kalanı ekle
-    if (v1.includes(' ')) ving = ving + v1.slice(v1.indexOf(' '));
-  } else {
-    v1 = document.getElementById('genVerbInput').value.trim().toLowerCase();
-    if (!v1) {
-      document.getElementById('genError').textContent = 'Listeden bir fiil seç veya kendin yaz.';
-      document.getElementById('genError').style.display = 'block';
-      return;
-    }
-  }
-
-  document.getElementById('genStartBtn').disabled = true;
-  document.getElementById('genProgressWrap').style.display = 'block';
-  setGenProgress(5, 'Fiil formları hazırlanıyor...');
-
-  // Manuel yazıldıysa Claude'dan V2/V3/Ving al
-  if (!selectedVerbObj) {
-    try {
-      const r1 = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: `"${v1}" fiilinin İngilizce formlarını ver. Sadece JSON ile yanıt ver, başka hiçbir şey yazma:\n{"v1":"...","v2":"...","v3":"...","ving":"..."}\nÖrnek go için: {"v1":"go","v2":"went","v3":"gone","ving":"going"}` }]
-        })
-      });
-      const d1 = await r1.json();
-      const raw = d1.content.map(b=>b.text||'').join('');
-      const match = raw.match(/\{[^}]+\}/);
-      if (!match) throw new Error('Fiil formları alınamadı');
-      const parsed = JSON.parse(match[0]);
-      v2 = parsed.v2; v3 = parsed.v3; ving = parsed.ving || makeIngForm(v1);
-    } catch(e) {
-      document.getElementById('genError').textContent = 'Hata: ' + e.message;
-      document.getElementById('genError').style.display = 'block';
-      document.getElementById('genStartBtn').disabled = false;
-      return;
-    }
-  }
-
-  setGenProgress(15, `<b>${v1} / ${v2} / ${v3}</b> — cümleler oluşturuluyor...`);
-
-  const englishSentences = VERB_TEMPLATES.map(t =>
-    t.replace(/\{V1\}/g, v1).replace(/\{V2\}/g, v2)
-     .replace(/\{V3\}/g, v3).replace(/\{VING\}/g, ving)
-  );
-
-  const CHUNK = 30;
-  const chunks = [];
-  for (let i = 0; i < englishSentences.length; i += CHUNK)
-    chunks.push(englishSentences.slice(i, i+CHUNK));
-
-  let allTR = [];
-  for (let ci = 0; ci < chunks.length; ci++) {
-    const pct = 20 + Math.round((ci / chunks.length) * 75);
-    setGenProgress(pct, `Türkçeye çevriliyor... <b>${Math.min((ci+1)*CHUNK, englishSentences.length)} / ${englishSentences.length}</b>`);
-    const chunk = chunks[ci];
-    try {
-      const r2 = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: `Türkçeye çevir. Sadece çevirileri sırasıyla yaz, numara veya açıklama ekleme. Parantez içinde kısa not ekleyebilirsin: (Erkek), (Kadın), (İzin), (Yasak), (süreç) gibi.\n\n${chunk.map((s,i)=>`${i+1}. ${s}`).join('\n')}` }]
-        })
-      });
-      const d2 = await r2.json();
-      const raw2 = d2.content.map(b=>b.text||'').join('\n');
-      const lines = raw2.split('\n').map(l=>l.trim().replace(/^\d+[\.\)]\s*/,'')).filter(l=>l);
-      allTR.push(...lines.slice(0, chunk.length));
-    } catch(e) {
-      document.getElementById('genError').textContent = 'Çeviri hatası: ' + e.message;
-      document.getElementById('genError').style.display = 'block';
-      document.getElementById('genStartBtn').disabled = false;
-      return;
-    }
-  }
-
-  setGenProgress(100, '✅ Tamamlandı! Ders yükleniyor...');
-
-  const generatedCards = englishSentences.map((en, i) => ({ en, tr: allTR[i] || '—' }));
-  const verbUpper = v1.charAt(0).toUpperCase() + v1.slice(1);
-  const trMeaning = selectedVerbObj ? ` — ${selectedVerbObj.tr}` : '';
-  const lessonObj = {
-    name: `✨ ${verbUpper}`,
-    subTitle: `${v1} / ${v2} / ${v3}${trMeaning}`,
-    file: null,
-    _data: generatedCards
-  };
-
-  setTimeout(() => {
-    document.getElementById('generate-screen').style.display = 'none';
-    document.getElementById('genStartBtn').disabled = false;
-    loadLessonDirect(lessonObj);
-  }, 600);
-}
-
-function loadLessonDirect(lesson) {
-  initAudio();
-  activeLesson = lesson;
-  shuffleMode = false;
-  shuffleQueue = [];
-  const data = lesson._data;
-  originalData = data;
-  totalInLesson = data.length;
-  cards = [...data];
-  learned = 0;
-  wrong = 0;
-  document.getElementById('lessonTitle').innerText = lesson.name;
-  document.getElementById('lessonContent').innerText = lesson.subTitle || "";
-  document.getElementById('entry-page').style.display = 'none';
-  document.getElementById('generate-screen').style.display = 'none';
-  document.getElementById('app-screen').style.display = 'flex';
-  document.getElementById('shuffleToggle').classList.remove('active');
-  show();
-}
-
-// =====================================================
-
-fetch('data.json').then(res => res.json()).then(data => {
-    const container = document.getElementById('lesson-list-container');
-    data.forEach(lesson => {
-        const div = document.createElement('div');
-        div.className = 'lesson-card';
-        div.onclick = () => loadLesson(lesson);
-        div.innerHTML = `<h3>${lesson.name}</h3><p>${lesson.subTitle || ""}</p>`;
-        container.appendChild(div);
-    });
-});
+// İlk açılış
+renderHome();
 </script>
 </body>
 </html>
