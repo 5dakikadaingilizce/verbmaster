@@ -288,8 +288,8 @@ function renderLessonMenu() {
         if (i === 0) statusClass = 'active';
 
         // KLASÖR MANTIĞI: İkon logolar/ klasöründen çekiliyor
-// Eğer lesson.icon boşsa varsayılan olarak logolar/logo1.svg kullanır
-const lessonIcon = lesson.icon ? `logolar/${lesson.icon}` : 'logolar/logo1.svg';
+// BUNU YAPIŞTIR:
+const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
@@ -297,8 +297,7 @@ const lessonIcon = lesson.icon ? `logolar/${lesson.icon}` : 'logolar/logo1.svg';
         card.innerHTML = `
             ${statusClass === 'active' ? '<div class="start-badge">HADİ!</div>' : ''}
             <div class="node-btn">
-                <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
-            </div>
+           <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
             <h3>${lesson.title}</h3>
         `;
         c.appendChild(card);
