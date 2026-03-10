@@ -89,7 +89,6 @@
             z-index: 2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             flex-shrink: 0;
-            /* Default renk (JavaScript ile ezilecek) */
             background: #38bdf8;
             box-shadow: 0 8px 0 #0284c7;
         }
@@ -129,12 +128,16 @@
             z-index: 10;
         }
 
+        .lesson-card.disabled { cursor: not-allowed; }
         .lesson-card.disabled .node-btn { 
             background: var(--locked-gray) !important; 
             box-shadow: 0 8px 0 var(--locked-shadow) !important; 
             opacity: 0.6; 
         }
         .lesson-card.disabled .node-logo { filter: grayscale(1) opacity(0.5); }
+        
+        /* Tamamlanmış (eskiden kilitli olmayan) dersler */
+        .lesson-card.completed .node-btn { opacity: 0.9; }
 
         .start-badge {
             position: absolute;
@@ -210,7 +213,7 @@
 </head>
 <body>
 
-<div class="v-tag">V.5.0 - Rainbow Path Mode</div>
+<div class="v-tag">V.5.1 - Progressive Unlock Mode</div>
 
 <div id="entry-page">
     <div class="main-title-white">5 Dakikada İngilizce</div>
@@ -227,7 +230,8 @@
     <div class="app-box">
         <div id="restartOverlay">
             <h2 style="font-family:Poppins; color:var(--active-color); margin-bottom:20px;">Unit Completed! 🏆</h2>
-            <button class="btn-speak" onclick="resetToStart()" style="width:80%;">RESTART</button>
+            <button class="btn-speak" onclick="goHome()" style="width:80%;">HARİTAYA DÖN</button>
+            <button class="btn-nav" onclick="resetToStart()" style="width:80%; margin-top:10px;">TEKRARLA</button>
         </div>
 
         <div class="header-center">
@@ -271,14 +275,13 @@ rec.lang = 'en-US';
 rec.continuous = true;
 rec.interimResults = false;
 
-// RENK PALETİ: Tamamlanan dersler için rastgele dönecek renkler
 const rainbowColors = [
-    { bg: '#38bdf8', shadow: '#0284c7' }, // Mavi
-    { bg: '#2dd4bf', shadow: '#0f766e' }, // Turkuaz
-    { bg: '#a855f7', shadow: '#7e22ce' }, // Mor
-    { bg: '#fb7185', shadow: '#e11d48' }, // Pembe
-    { bg: '#4ade80', shadow: '#16a34a' }, // Yeşil
-    { bg: '#60a5fa', shadow: '#2563eb' }  // Kraliyet Mavisi
+    { bg: '#38bdf8', shadow: '#0284c7' },
+    { bg: '#2dd4bf', shadow: '#0f766e' },
+    { bg: '#a855f7', shadow: '#7e22ce' },
+    { bg: '#fb7185', shadow: '#e11d48' },
+    { bg: '#4ade80', shadow: '#16a34a' },
+    { bg: '#60a5fa', shadow: '#2563eb' }
 ];
 
 let allLessonsData = [], currentList = [];
@@ -297,23 +300,37 @@ function renderLessonMenu() {
     const c = document.getElementById('lesson-list-container');
     c.innerHTML = '';
     
-    // Aktif dersi bul (şimdilik ilk ders aktif, istersen ilerleme durumuna göre değişebilir)
-    let activeIndex = 0; 
+    // LocalStorage'dan tamamlananları al
+    const completedOnes = JSON.parse(localStorage.getItem('completed_lessons_list') || "[]");
+    
+    // İlk kilitli dersin indexini bul
+    let activeFound = false;
 
     allLessonsData.forEach((lesson, i) => {
-        const ok = !!lesson.file;
         const card = document.createElement('div');
+        const isCompleted = completedOnes.includes(lesson.id);
         
-        let statusClass = ok ? 'completed' : 'disabled';
-        if (i === activeIndex) statusClass = 'active';
+        let statusClass = 'disabled';
+        
+        // Eğer ders bittiyse 'completed'
+        if (isCompleted) {
+            statusClass = 'completed';
+        } 
+        // Ders bitmemişse ve henüz aktif bir ders belirlenmediyse bu 'active'dir
+        else if (!activeFound) {
+            statusClass = 'active';
+            activeFound = true;
+        }
 
-        const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
-        
-        // Renk seçimi (Gökkuşağı döngüsü)
         const colorSet = rainbowColors[i % rainbowColors.length];
+        const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
 
         card.className = `lesson-card ${statusClass}`;
-        card.onclick = () => { if (ok) startLesson(lesson); };
+        
+        // Sadece tamamlanmış veya aktif derslere tıklanabilir
+        if (statusClass !== 'disabled') {
+            card.onclick = () => startLesson(lesson);
+        }
         
         card.innerHTML = `
             ${statusClass === 'active' ? '<div class="start-badge">HADİ!</div>' : ''}
@@ -345,12 +362,16 @@ function startLesson(lesson) {
         document.getElementById('lessonSubTitle').innerText = lesson.subTitle || "";
         document.getElementById('entry-page').style.display = 'none';
         document.getElementById('app-screen').style.display = 'flex';
+        document.getElementById('restartOverlay').style.display = 'none';
         render(true);
     });
 }
 
 function render(speakTR = false) {
-    if (index >= currentList.length) { document.getElementById('restartOverlay').style.display = 'flex'; return; }
+    if (index >= currentList.length) { 
+        handleUnitComplete();
+        return; 
+    }
     document.getElementById('phrase-tr').textContent = currentList[index].tr;
     document.getElementById('phrase-en').textContent = currentList[index].en;
     document.getElementById('phrase-en').style.opacity = showEn ? '1' : '0';
@@ -361,6 +382,17 @@ function render(speakTR = false) {
     document.getElementById('remaining').textContent = currentList.length - (index + 1);
     saveProgress();
     if (isAutoTR && speakTR) setTimeout(doSpeakTR, 400);
+}
+
+// DERS BİTİNCE ÇALIŞAN FONKSİYON
+function handleUnitComplete() {
+    // Listeye ekle
+    let completedOnes = JSON.parse(localStorage.getItem('completed_lessons_list') || "[]");
+    if (!completedOnes.includes(activeLessonId)) {
+        completedOnes.push(activeLessonId);
+        localStorage.setItem('completed_lessons_list', JSON.stringify(completedOnes));
+    }
+    document.getElementById('restartOverlay').style.display = 'flex';
 }
 
 function saveProgress() { if (activeLessonId) localStorage.setItem('lesson_progress_' + activeLessonId, JSON.stringify({ index, correctCount, passedCount })); }
@@ -436,7 +468,7 @@ function nextWord() {
         render(true); 
         document.getElementById('result').innerHTML = ''; 
     } else { 
-        document.getElementById('restartOverlay').style.display = 'flex'; 
+        handleUnitComplete();
     }
 }
 
@@ -450,6 +482,7 @@ function goHome() {
     autoMode = false; try { rec.stop(); } catch(e) {}
     document.getElementById('app-screen').style.display = 'none';
     document.getElementById('entry-page').style.display = 'flex';
+    renderLessonMenu(); // Geri dönünce listeyi tazele ki kilitler açılsın
 }
 
 function resetToStart() {
