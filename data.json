@@ -3,5 +3,11 @@
   { "id": 2, "title": "#Lesson 2", "subTitle": "a, an, the Kullanımı", "file": "lessons/lesson2data.json", "icon": "logolar/logo2.svg" },
   { "id": 3, "title": "#Lesson 3", "subTitle": "Yakında.....", "file": "lessons/lesson3data.json", "icon": "logolar/logo3.svg" },
   { "id": 4, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo4.svg" },
-  { "id": 5, "title": "#Lesson 5", "subTitle": "Yakında", "file": "lessons/lesson5data.json", "icon": "logolar/logo5.svg" }
+  { "id": 5, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo5.svg" },
+  { "id": 6, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo6.svg" },
+  { "id": 7, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo7.svg" },
+  { "id": 8, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo8.svg" },
+  { "id": 9, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo9.svg" },
+  { "id": 10, "title": "#Lesson 4", "subTitle": "Yakında", "file": "lessons/lesson4data.json", "icon": "logolar/logo10.svg" },
+  { "id": 11, "title": "#Lesson 5", "subTitle": "Yakında", "file": "lessons/lesson5data.json", "icon": "logolar/logo11.svg" }
 ]
