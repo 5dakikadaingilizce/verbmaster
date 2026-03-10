@@ -15,12 +15,24 @@
             --accent: #fb7185;
             --glass-border: rgba(255,255,255,0.12);
             --shadow-glow: 0 0 30px rgba(249,115,22,0.15);
-            --active-color: #fbbf24; /* Aktif ders için sarı */
+            --active-color: #fbbf24;
             --active-shadow: #d97706;
             --locked-gray: #374151;
             --locked-shadow: #1f2937;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ══ 3. KAYDIRMA ÇUBUĞUNU GİZLEME ══ */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -ms-overflow-style: none;  /* IE/Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        *::-webkit-scrollbar { 
+            display: none; /* Chrome/Safari */
+        }
+
         html, body { height: 100%; overflow-x: hidden; }
         body {
             font-family: 'Inter', sans-serif;
@@ -42,6 +54,13 @@
             padding: 20px 10px 100px;
         }
 
+        /* ══ 2. ÜST LOGO STİLİ ══ */
+        .top-logo-img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
         .main-title-white {
             font-family: 'Poppins';
             font-size: 22px;
@@ -49,7 +68,7 @@
             background: var(--white-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 10px 0 20px;
+            margin: 0 0 20px;
         }
 
         #lesson-list-container {
@@ -73,20 +92,15 @@
             gap: 20px;
         }
 
-        /* Zikzak Dizilimi */
         .lesson-card:nth-child(4n+2) { transform: translateX(30px); }
         .lesson-card:nth-child(4n+3) { transform: translateX(50px); }
         .lesson-card:nth-child(4n+4) { transform: translateX(30px); }
 
         .node-btn {
-            width: 95px;
-            height: 95px;
+            width: 95px; height: 95px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             flex-shrink: 0;
             background: #38bdf8;
@@ -94,8 +108,7 @@
         }
 
         .node-logo {
-            width: 70%;
-            height: 70%;
+            width: 70%; height: 70%;
             background-size: contain !important;
             background-repeat: no-repeat;
             background-position: center;
@@ -103,119 +116,58 @@
         }
 
         .lesson-card h3 {
-            font-size: 15px;
-            font-weight: 800;
-            margin-top: 0 !important;
-            color: #f8fafc;
-            text-align: right;
-            max-width: 180px;
-            font-family: 'Poppins';
+            font-size: 15px; font-weight: 800;
+            color: #f8fafc; text-align: right;
+            max-width: 180px; font-family: 'Poppins';
             line-height: 1.2;
         }
 
-        @keyframes floatAnim {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Durum Renkleri ve Aktiflik */
         .lesson-card.active .node-btn { 
             background: var(--active-color) !important; 
             box-shadow: 0 8px 0 var(--active-shadow) !important;
-            width: 110px; 
-            height: 110px;
+            width: 110px; height: 110px;
             animation: floatAnim 2.5s ease-in-out infinite;
             z-index: 10;
         }
 
         .lesson-card.disabled { cursor: not-allowed; }
-        .lesson-card.disabled .node-btn { 
-            background: var(--locked-gray) !important; 
-            box-shadow: 0 8px 0 var(--locked-shadow) !important; 
-            opacity: 0.6; 
-        }
+        .lesson-card.disabled .node-btn { background: var(--locked-gray) !important; box-shadow: 0 8px 0 var(--locked-shadow) !important; opacity: 0.6; }
         .lesson-card.disabled .node-logo { filter: grayscale(1) opacity(0.5); }
-        
-        /* Tamamlanmış (eskiden kilitli olmayan) dersler */
         .lesson-card.completed .node-btn { opacity: 0.9; }
 
+        /* ══ 1. İSİMLİ BADGE STİLİ ══ */
         .start-badge {
-            position: absolute;
-            top: -20px;
-            right: 15px;
-            background: white;
-            color: #d97706;
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 11px;
-            box-shadow: 0 4px 0 #cbd5e1;
-            z-index: 15;
+            position: absolute; top: -20px; right: 15px;
+            background: white; color: #d97706;
+            padding: 5px 12px; border-radius: 12px;
+            font-weight: 900; font-size: 11px;
+            box-shadow: 0 4px 0 #cbd5e1; z-index: 15;
             animation: bounce 1.5s infinite;
+            text-transform: uppercase;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+        @keyframes floatAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        /* ══ APP SCREEN ══ */
-        #app-screen {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            max-width: 420px;
-            height: 100dvh;
-            padding: 8px 8px max(8px, env(safe-area-inset-bottom));
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .top-bar { display: flex; gap: 5px; background: rgba(15,23,42,0.7); backdrop-filter: blur(20px); padding: 5px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; margin-bottom: 6px; }
-        .nav-btn { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; height: 34px; font-size: 10px; font-weight: 700; color: #94a3b8; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.25s; }
-        .nav-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-        .auto-tr-btn.active { background: linear-gradient(135deg, #fb7185, #f43f5e); color: white; box-shadow: 0 3px 12px rgba(251,113,133,0.4); }
-
-        .app-box {
-            background: linear-gradient(145deg, rgba(30,41,59,0.75), rgba(15,23,42,0.85));
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 12px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 24px 48px -12px rgba(0,0,0,0.6), var(--shadow-glow);
-            text-align: center; position: relative; display: flex; flex-direction: column; flex: 1; min-height: 0;
-        }
-
-        .lesson-title-grad { background: var(--logo-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; font-size: clamp(15px,4.5vw,21px); font-family: 'Poppins'; }
-        
-        .phrase-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 6px 0; background: rgba(15,23,42,0.55); border-radius: 18px; padding: 16px; border: 1px solid rgba(255,255,255,0.1); }
-        #phrase-tr { font-size: clamp(17px,5vw,26px); font-weight: 800; color: var(--secondary); margin-bottom: 10px; }
-        #phrase-en { font-size: clamp(13px,4vw,18px); color: #94a3b8; font-style: italic; }
-
-        .btn-speak { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; width: 100%; height: 55px; border-radius: 16px; font-size: 18px; font-weight: 900; border: none; font-family: 'Poppins'; cursor: pointer; margin-bottom: 7px; }
-        .recording { background: linear-gradient(135deg, #fb7185, #f43f5e) !important; animation: pulse-glow 1s infinite; }
-        
-        @keyframes pulse-glow { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
-
-        .btn-row-3, .btn-row-2 { display: flex; gap: 6px; margin-bottom: 6px; }
-        .btn-show, .btn-pass, .btn-listen, .btn-nav { flex: 1; border-radius: 12px; height: 45px; font-weight: 700; cursor: pointer; font-size: 11px; border: none; }
-        .btn-show { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
-        .btn-pass { background: linear-gradient(135deg, #fb7185, #f43f5e); color: white; }
-        .btn-listen { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; }
-        .btn-nav { background: rgba(51,65,85,0.7); color: white; }
-
-        .stats { background: rgba(15,23,42,0.55); padding: 8px; border-radius: 14px; display: flex; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); }
-        .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
-        .stat-val { font-size: 15px; font-weight: 900; }
-
-        #result { height: 20px; font-weight: 700; font-size: 12px; margin-bottom: 5px; }
-        #restartOverlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.98); border-radius: 22px; flex-direction: column; justify-content: center; align-items: center; z-index: 50; }
+        /* APP SCREEN STYLES (Kodunun devamı) */
+        #app-screen { display: none; flex-direction: column; width: 100%; max-width: 420px; height: 100dvh; padding: 8px; overflow: hidden; margin: 0 auto; }
+        .top-bar { display: flex; gap: 5px; background: rgba(15,23,42,0.7); backdrop-filter: blur(20px); padding: 5px; border-radius: 14px; margin-bottom: 6px; }
+        .nav-btn { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; height: 34px; font-size: 10px; color: #94a3b8; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .app-box { background: linear-gradient(145deg, rgba(30,41,59,0.75), rgba(15,23,42,0.85)); padding: 12px; border-radius: 22px; text-align: center; position: relative; display: flex; flex-direction: column; flex: 1; }
+        .btn-speak { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; width: 100%; height: 55px; border-radius: 16px; font-size: 18px; font-weight: 900; border: none; cursor: pointer; }
+        #restartOverlay { display: none; position: absolute; inset: 0; background: rgba(15,23,42,0.98); border-radius: 22px; flex-direction: column; justify-content: center; align-items: center; z-index: 50; }
+        .phrase-container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 6px 0; background: rgba(15,23,42,0.55); border-radius: 18px; padding: 16px; }
+        #phrase-tr { font-size: 26px; font-weight: 800; color: var(--secondary); }
+        .stats { background: rgba(15,23,42,0.55); padding: 8px; border-radius: 14px; display: flex; justify-content: space-between; margin-top: 10px; }
         .v-tag { position: fixed; top: 10px; right: 10px; font-size: 10px; color: rgba(255,255,255,0.3); z-index: 200; }
     </style>
 </head>
 <body>
 
-<div class="v-tag">V.5.1 - Progressive Unlock Mode</div>
+<div class="v-tag">V.5.2 - Personalized Mode</div>
 
 <div id="entry-page">
+    <img src="module1logo.png" alt="Module Logo" class="top-logo-img">
     <div class="main-title-white">5 Dakikada İngilizce</div>
     <div id="lesson-list-container"></div>
 </div>
@@ -223,119 +175,81 @@
 <div id="app-screen">
     <div class="top-bar">
         <button class="nav-btn" onclick="goHome()"><span class="material-symbols-rounded">home</span> HOME</button>
-        <button id="autoTRToggle" class="nav-btn auto-tr-btn" onclick="toggleAutoTR()"><span class="material-symbols-rounded">volume_up</span> AUTO TR</button>
+        <button id="autoTRToggle" class="nav-btn" onclick="toggleAutoTR()"><span class="material-symbols-rounded">volume_up</span> AUTO TR</button>
         <button class="nav-btn" onclick="resetToStart()"><span class="material-symbols-rounded">refresh</span> RESTART</button>
     </div>
-
     <div class="app-box">
         <div id="restartOverlay">
-            <h2 style="font-family:Poppins; color:var(--active-color); margin-bottom:20px;">Unit Completed! 🏆</h2>
+            <h2 style="color:var(--active-color); margin-bottom:20px;">Unit Completed! 🏆</h2>
             <button class="btn-speak" onclick="goHome()" style="width:80%;">HARİTAYA DÖN</button>
-            <button class="btn-nav" onclick="resetToStart()" style="width:80%; margin-top:10px;">TEKRARLA</button>
         </div>
-
-        <div class="header-center">
-            <div id="lessonTitle" class="lesson-title-grad">Lesson Name</div>
-            <div id="lessonSubTitle" style="font-size:10px; color:#94a3b8;">Sub Title</div>
-        </div>
-
+        <div id="lessonTitle" style="font-weight:900; color:var(--active-color)">Lesson Name</div>
         <div class="phrase-container">
             <div id="phrase-tr">...</div>
-            <div id="phrase-en" style="opacity:0;">...</div>
+            <div id="phrase-en" style="opacity:0; color:#94a3b8;">...</div>
         </div>
-
         <button class="btn-speak" id="startBtn">TAP TO SPEAK</button>
-
-        <div class="btn-row-3">
-            <button class="btn-show" id="toggleBtn">SHOW EN</button>
-            <button class="btn-pass" id="passBtn">PASS</button>
-            <button class="btn-listen" id="listenBtn">LISTEN</button>
-        </div>
-
-        <div class="btn-row-2">
-            <button class="btn-nav" id="backBtn">← BACK</button>
-            <button class="btn-nav" id="nextBtn">NEXT →</button>
-        </div>
-
-        <div id="result"></div>
-
-        <div class="stats">
-            <div class="stat-item"><span class="stat-val" style="color:#38bdf8;" id="current">1</span></div>
-            <div class="stat-item"><span class="stat-val" style="color:#2dd4bf;" id="correct">0</span></div>
-            <div class="stat-item"><span class="stat-val" style="color:#fb7185;" id="passedCount">0</span></div>
-            <div class="stat-item"><span class="stat-val" style="color:#f97316;" id="remaining">0</span></div>
+        <div class="stats" style="margin-top:15px;">
+            <div id="current" class="stat-val">1</div>
+            <div id="correct" class="stat-val">0</div>
+            <div id="remaining" class="stat-val">0</div>
         </div>
     </div>
 </div>
 
 <script>
+// ══ 1. İSİM KAYIT SİSTEMİ ══
+let userNick = localStorage.getItem('app_user_nick');
+if (!userNick) {
+    userNick = prompt("Hoş geldin! Sana nasıl hitap etmemi istersin?");
+    if (!userNick || userNick.trim() === "") userNick = "Kanka";
+    localStorage.setItem('app_user_nick', userNick.toUpperCase());
+} else {
+    userNick = userNick.toUpperCase();
+}
+
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 const rec = new SR();
 rec.lang = 'en-US';
-rec.continuous = true;
-rec.interimResults = false;
 
 const rainbowColors = [
     { bg: '#38bdf8', shadow: '#0284c7' },
     { bg: '#2dd4bf', shadow: '#0f766e' },
     { bg: '#a855f7', shadow: '#7e22ce' },
     { bg: '#fb7185', shadow: '#e11d48' },
-    { bg: '#4ade80', shadow: '#16a34a' },
-    { bg: '#60a5fa', shadow: '#2563eb' }
+    { bg: '#4ade80', shadow: '#16a34a' }
 ];
 
-let allLessonsData = [], currentList = [];
-let index = 0, correctCount = 0, passedCount = 0;
-let isListening = false, showEn = false, autoMode = false;
-let activeLessonId = null;
-let isAutoTR = localStorage.getItem('auto_tr_voice') === 'true';
-if (isAutoTR) document.getElementById('autoTRToggle').classList.add('active');
+let allLessonsData = [], currentList = [], index = 0, activeLessonId = null;
 
 fetch('data.json').then(r => r.json()).then(data => { 
     allLessonsData = data; 
     renderLessonMenu(); 
-}).catch(err => console.error("Data.json bulunamadı!", err));
+});
 
 function renderLessonMenu() {
     const c = document.getElementById('lesson-list-container');
     c.innerHTML = '';
-    
-    // LocalStorage'dan tamamlananları al
     const completedOnes = JSON.parse(localStorage.getItem('completed_lessons_list') || "[]");
-    
-    // İlk kilitli dersin indexini bul
     let activeFound = false;
 
     allLessonsData.forEach((lesson, i) => {
         const card = document.createElement('div');
         const isCompleted = completedOnes.includes(lesson.id);
-        
         let statusClass = 'disabled';
         
-        // Eğer ders bittiyse 'completed'
-        if (isCompleted) {
-            statusClass = 'completed';
-        } 
-        // Ders bitmemişse ve henüz aktif bir ders belirlenmediyse bu 'active'dir
-        else if (!activeFound) {
-            statusClass = 'active';
-            activeFound = true;
-        }
+        if (isCompleted) statusClass = 'completed';
+        else if (!activeFound) { statusClass = 'active'; activeFound = true; }
 
         const colorSet = rainbowColors[i % rainbowColors.length];
-        const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
-
         card.className = `lesson-card ${statusClass}`;
+        if (statusClass !== 'disabled') card.onclick = () => startLesson(lesson);
         
-        // Sadece tamamlanmış veya aktif derslere tıklanabilir
-        if (statusClass !== 'disabled') {
-            card.onclick = () => startLesson(lesson);
-        }
-        
+        // 1. DİNAMİK "HADİ İSİM" BADGE
         card.innerHTML = `
-            ${statusClass === 'active' ? '<div class="start-badge">HADİ!</div>' : ''}
+            ${statusClass === 'active' ? `<div class="start-badge">HADİ ${userNick}!</div>` : ''}
             <div class="node-btn" style="background: ${colorSet.bg}; box-shadow: 0 8px 0 ${colorSet.shadow};">
-                <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
+                <div class="node-logo" style="background-image: url('${lesson.icon || 'logolar/logo1.svg'}');"></div>
             </div>
             <h3>${lesson.subTitle || lesson.title}</h3>
         `;
@@ -347,151 +261,40 @@ function startLesson(lesson) {
     fetch(lesson.file).then(r => r.json()).then(data => {
         activeLessonId = lesson.id;
         currentList = [...data];
-        const saved = localStorage.getItem('lesson_progress_' + activeLessonId);
-        if (saved) { 
-            const p = JSON.parse(saved); 
-            index = p.index; 
-            correctCount = p.correctCount; 
-            passedCount = p.passedCount; 
-        } else { 
-            index = 0; 
-            correctCount = 0; 
-            passedCount = 0; 
-        }
+        index = 0;
         document.getElementById('lessonTitle').innerText = lesson.title;
-        document.getElementById('lessonSubTitle').innerText = lesson.subTitle || "";
         document.getElementById('entry-page').style.display = 'none';
         document.getElementById('app-screen').style.display = 'flex';
-        document.getElementById('restartOverlay').style.display = 'none';
-        render(true);
+        render();
     });
 }
 
-function render(speakTR = false) {
-    if (index >= currentList.length) { 
-        handleUnitComplete();
-        return; 
+function render() {
+    if (index >= currentList.length) {
+        let completed = JSON.parse(localStorage.getItem('completed_lessons_list') || "[]");
+        if (!completed.includes(activeLessonId)) {
+            completed.push(activeLessonId);
+            localStorage.setItem('completed_lessons_list', JSON.stringify(completed));
+        }
+        document.getElementById('restartOverlay').style.display = 'flex';
+        return;
     }
     document.getElementById('phrase-tr').textContent = currentList[index].tr;
     document.getElementById('phrase-en').textContent = currentList[index].en;
-    document.getElementById('phrase-en').style.opacity = showEn ? '1' : '0';
-    document.getElementById('toggleBtn').innerText = showEn ? 'HIDE EN' : 'SHOW EN';
     document.getElementById('current').textContent = index + 1;
-    document.getElementById('correct').textContent = correctCount;
-    document.getElementById('passedCount').textContent = passedCount;
     document.getElementById('remaining').textContent = currentList.length - (index + 1);
-    saveProgress();
-    if (isAutoTR && speakTR) setTimeout(doSpeakTR, 400);
-}
-
-// DERS BİTİNCE ÇALIŞAN FONKSİYON
-function handleUnitComplete() {
-    // Listeye ekle
-    let completedOnes = JSON.parse(localStorage.getItem('completed_lessons_list') || "[]");
-    if (!completedOnes.includes(activeLessonId)) {
-        completedOnes.push(activeLessonId);
-        localStorage.setItem('completed_lessons_list', JSON.stringify(completedOnes));
-    }
-    document.getElementById('restartOverlay').style.display = 'flex';
-}
-
-function saveProgress() { if (activeLessonId) localStorage.setItem('lesson_progress_' + activeLessonId, JSON.stringify({ index, correctCount, passedCount })); }
-
-function doSpeakTR() {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(currentList[index].tr);
-    u.lang = 'tr-TR'; window.speechSynthesis.speak(u);
-}
-
-function speakEN() {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(currentList[index].en);
-    u.lang = 'en-US'; u.rate = 0.8; window.speechSynthesis.speak(u);
-}
-
-function playBeep(ok) {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator(), g = ctx.createGain();
-    osc.connect(g); g.connect(ctx.destination);
-    osc.frequency.value = ok ? 800 : 150;
-    g.gain.setValueAtTime(0.2, ctx.currentTime);
-    osc.start(); osc.stop(ctx.currentTime + 0.3);
-}
-
-function normalizeForComparison(text) {
-    return text.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,'');
-}
-
-rec.onstart = () => {
-    isListening = true;
-    document.getElementById('startBtn').innerText = 'LISTENING...';
-    document.getElementById('startBtn').classList.add('recording');
-};
-
-rec.onresult = (e) => {
-    let spoken = e.results[e.results.length - 1][0].transcript;
-    const target = currentList[index].en;
-    if (normalizeForComparison(spoken).includes(normalizeForComparison(target))) {
-        correctCount++;
-        playBeep(true);
-        document.getElementById('result').innerHTML = "<span style='color:var(--secondary)'>YES! ✅</span>";
-        setTimeout(() => { nextWord(); if (!autoMode) rec.stop(); }, 800);
-    } else {
-        playBeep(false);
-        document.getElementById('result').innerHTML = `<span style='color:var(--accent)'>❌ "${spoken}"</span>`;
-    }
-};
-
-rec.onend = () => {
-    if (autoMode) { try { rec.start(); } catch(e) {} }
-    else {
-        isListening = false;
-        document.getElementById('startBtn').innerText = 'TAP TO SPEAK';
-        document.getElementById('startBtn').classList.remove('recording');
-    }
-};
-
-document.getElementById('startBtn').onclick = () => {
-    if (!isListening) { autoMode = true; rec.start(); }
-    else { autoMode = false; rec.stop(); }
-};
-document.getElementById('listenBtn').onclick = speakEN;
-document.getElementById('toggleBtn').onclick = () => { showEn = !showEn; render(false); };
-document.getElementById('nextBtn').onclick = nextWord;
-document.getElementById('backBtn').onclick = () => { if (index > 0) { index--; render(true); } };
-document.getElementById('passBtn').onclick = () => { passedCount++; currentList.push(currentList[index]); nextWord(); };
-
-function nextWord() {
-    if (index < currentList.length - 1) { 
-        index++; 
-        showEn = false; 
-        render(true); 
-        document.getElementById('result').innerHTML = ''; 
-    } else { 
-        handleUnitComplete();
-    }
-}
-
-function toggleAutoTR() {
-    isAutoTR = !isAutoTR;
-    localStorage.setItem('auto_tr_voice', isAutoTR);
-    document.getElementById('autoTRToggle').classList.toggle('active');
 }
 
 function goHome() {
-    autoMode = false; try { rec.stop(); } catch(e) {}
     document.getElementById('app-screen').style.display = 'none';
     document.getElementById('entry-page').style.display = 'flex';
-    renderLessonMenu(); // Geri dönünce listeyi tazele ki kilitler açılsın
+    renderLessonMenu();
 }
 
 function resetToStart() {
-    if (confirm('Sıfırlansın mı?')) {
-        index = 0; correctCount = 0; passedCount = 0;
-        localStorage.removeItem('lesson_progress_' + activeLessonId);
-        document.getElementById('restartOverlay').style.display = 'none';
-        render(true);
-    }
+    index = 0;
+    document.getElementById('restartOverlay').style.display = 'none';
+    render();
 }
 </script>
 </body>
