@@ -91,14 +91,14 @@
         }
 
         /* Logo Ayarları - SVG'ler için optimize edildi */
-        .node-logo {
-            width: 75%;
-            height: 75%;
-            background-size: contain !important;
-            background-repeat: no-repeat;
-            background-position: center;
-            display: block;
-        }
+  .node-logo {
+    width: 60px; /* Sabit boyut vererek görünürlüğü garantileyin */
+    height: 60px;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+}
 
         @keyframes floatAnim {
             0%, 100% { transform: translateY(0); }
@@ -288,7 +288,8 @@ function renderLessonMenu() {
         if (i === 0) statusClass = 'active';
 
         // KLASÖR MANTIĞI: İkon logolar/ klasöründen çekiliyor
-   const lessonIcon = lesson.icon ? `svg/${lesson.icon}` : 'svg/1.svg';
+// Eğer lesson.icon boşsa varsayılan olarak logolar/logo1.svg kullanır
+const lessonIcon = lesson.icon ? `logolar/${lesson.icon}` : 'logolar/logo1.svg';
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
