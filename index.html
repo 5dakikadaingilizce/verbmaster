@@ -15,10 +15,8 @@
             --accent: #fb7185;
             --glass-border: rgba(255,255,255,0.12);
             --shadow-glow: 0 0 30px rgba(249,115,22,0.15);
-            --completed-gold: #fbbf24;
-            --completed-shadow: #d97706;
-            --current-orange: #f97316;
-            --current-shadow: #c2410c;
+            --active-color: #fbbf24; /* Aktif ders için sarı */
+            --active-shadow: #d97706;
             --locked-gray: #374151;
             --locked-shadow: #1f2937;
         }
@@ -63,17 +61,16 @@
             position: relative;
         }
 
-        /* ══ YENİLENEN DERS KARTI YAPISI ══ */
         .lesson-card {
             position: relative;
             display: flex;
-            flex-direction: row-reverse !important; /* LOGO SAĞA, YAZI SOLA */
+            flex-direction: row-reverse !important;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: transform 0.2s;
             width: 100%;
-            gap: 20px; /* Logo ve yazı arası boşluk */
+            gap: 20px;
         }
 
         /* Zikzak Dizilimi */
@@ -82,8 +79,8 @@
         .lesson-card:nth-child(4n+4) { transform: translateX(30px); }
 
         .node-btn {
-            width: 100px; /* BÜYÜTÜLDÜ */
-            height: 100px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -92,11 +89,14 @@
             z-index: 2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             flex-shrink: 0;
+            /* Default renk (JavaScript ile ezilecek) */
+            background: #38bdf8;
+            box-shadow: 0 8px 0 #0284c7;
         }
 
         .node-logo {
-            width: 75%; /* İkon boyutu artırıldı */
-            height: 75%;
+            width: 70%;
+            height: 70%;
             background-size: contain !important;
             background-repeat: no-repeat;
             background-position: center;
@@ -104,11 +104,11 @@
         }
 
         .lesson-card h3 {
-            font-size: 15px; /* Yazı boyutu artırıldı */
+            font-size: 15px;
             font-weight: 800;
             margin-top: 0 !important;
             color: #f8fafc;
-            text-align: right; /* Yazıyı logoya yaslar */
+            text-align: right;
             max-width: 180px;
             font-family: 'Poppins';
             line-height: 1.2;
@@ -116,33 +116,38 @@
 
         @keyframes floatAnim {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* Durum Renkleri */
-        .lesson-card.completed .node-btn { background: var(--completed-gold); box-shadow: 0 8px 0 var(--completed-shadow); }
+        /* Durum Renkleri ve Aktiflik */
         .lesson-card.active .node-btn { 
-            background: var(--current-orange); 
-            box-shadow: 0 8px 0 var(--current-shadow); 
+            background: var(--active-color) !important; 
+            box-shadow: 0 8px 0 var(--active-shadow) !important;
             width: 110px; 
             height: 110px;
             animation: floatAnim 2.5s ease-in-out infinite;
+            z-index: 10;
         }
-        .lesson-card.disabled .node-btn { background: var(--locked-gray); box-shadow: 0 8px 0 var(--locked-shadow); opacity: 0.6; }
+
+        .lesson-card.disabled .node-btn { 
+            background: var(--locked-gray) !important; 
+            box-shadow: 0 8px 0 var(--locked-shadow) !important; 
+            opacity: 0.6; 
+        }
         .lesson-card.disabled .node-logo { filter: grayscale(1) opacity(0.5); }
 
         .start-badge {
             position: absolute;
             top: -20px;
-            right: 10px;
+            right: 15px;
             background: white;
-            color: var(--current-orange);
+            color: #d97706;
             padding: 5px 12px;
             border-radius: 12px;
             font-weight: 900;
             font-size: 11px;
             box-shadow: 0 4px 0 #cbd5e1;
-            z-index: 5;
+            z-index: 15;
             animation: bounce 1.5s infinite;
         }
 
@@ -151,7 +156,7 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* ══ APP SCREEN (DEĞİŞMEDİ) ══ */
+        /* ══ APP SCREEN ══ */
         #app-screen {
             display: none;
             flex-direction: column;
@@ -205,7 +210,7 @@
 </head>
 <body>
 
-<div class="v-tag">V.4.5 - Folder Sync Mode</div>
+<div class="v-tag">V.5.0 - Rainbow Path Mode</div>
 
 <div id="entry-page">
     <div class="main-title-white">5 Dakikada İngilizce</div>
@@ -221,7 +226,7 @@
 
     <div class="app-box">
         <div id="restartOverlay">
-            <h2 style="font-family:Poppins; color:var(--completed-gold); margin-bottom:20px;">Unit Completed! 🏆</h2>
+            <h2 style="font-family:Poppins; color:var(--active-color); margin-bottom:20px;">Unit Completed! 🏆</h2>
             <button class="btn-speak" onclick="resetToStart()" style="width:80%;">RESTART</button>
         </div>
 
@@ -266,6 +271,16 @@ rec.lang = 'en-US';
 rec.continuous = true;
 rec.interimResults = false;
 
+// RENK PALETİ: Tamamlanan dersler için rastgele dönecek renkler
+const rainbowColors = [
+    { bg: '#38bdf8', shadow: '#0284c7' }, // Mavi
+    { bg: '#2dd4bf', shadow: '#0f766e' }, // Turkuaz
+    { bg: '#a855f7', shadow: '#7e22ce' }, // Mor
+    { bg: '#fb7185', shadow: '#e11d48' }, // Pembe
+    { bg: '#4ade80', shadow: '#16a34a' }, // Yeşil
+    { bg: '#60a5fa', shadow: '#2563eb' }  // Kraliyet Mavisi
+];
+
 let allLessonsData = [], currentList = [];
 let index = 0, correctCount = 0, passedCount = 0;
 let isListening = false, showEn = false, autoMode = false;
@@ -282,21 +297,27 @@ function renderLessonMenu() {
     const c = document.getElementById('lesson-list-container');
     c.innerHTML = '';
     
+    // Aktif dersi bul (şimdilik ilk ders aktif, istersen ilerleme durumuna göre değişebilir)
+    let activeIndex = 0; 
+
     allLessonsData.forEach((lesson, i) => {
         const ok = !!lesson.file;
         const card = document.createElement('div');
         
         let statusClass = ok ? 'completed' : 'disabled';
-        if (i === 0) statusClass = 'active';
+        if (i === activeIndex) statusClass = 'active';
 
         const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
+        
+        // Renk seçimi (Gökkuşağı döngüsü)
+        const colorSet = rainbowColors[i % rainbowColors.length];
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
         
         card.innerHTML = `
             ${statusClass === 'active' ? '<div class="start-badge">HADİ!</div>' : ''}
-            <div class="node-btn">
+            <div class="node-btn" style="background: ${colorSet.bg}; box-shadow: 0 8px 0 ${colorSet.shadow};">
                 <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
             </div>
             <h3>${lesson.subTitle || lesson.title}</h3>
