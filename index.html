@@ -90,22 +90,22 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Logo Ayarları */
+        /* Logo Ayarları - SVG'ler için optimize edildi */
         .node-logo {
-            width: 70%;
-            height: 70%;
-            background-size: contain;
+            width: 75%;
+            height: 75%;
+            background-size: contain !important;
             background-repeat: no-repeat;
             background-position: center;
+            display: block;
         }
 
-        /* Animasyon: Süzülme */
         @keyframes floatAnim {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
 
-        /* Durumlar */
+        /* Durum Renkleri */
         .lesson-card.completed .node-btn { background: var(--completed-gold); box-shadow: 0 8px 0 var(--completed-shadow); }
         
         .lesson-card.active .node-btn { 
@@ -113,7 +113,7 @@
             box-shadow: 0 8px 0 var(--current-shadow); 
             width: 100px; 
             height: 100px;
-            animation: floatAnim 2.5s ease-in-out infinite; /* Süzülme burada devreye giriyor */
+            animation: floatAnim 2.5s ease-in-out infinite;
         }
         
         .lesson-card.disabled .node-btn { background: var(--locked-gray); box-shadow: 0 8px 0 var(--locked-shadow); opacity: 0.6; }
@@ -148,7 +148,7 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* ══ APP SCREEN (Değişmedi) ══ */
+        /* ══ APP SCREEN ══ */
         #app-screen {
             display: none;
             flex-direction: column;
@@ -202,7 +202,7 @@
 </head>
 <body>
 
-<div class="v-tag">V.4.3 - Custom Icon Edition</div>
+<div class="v-tag">V.4.5 - Folder Sync Mode</div>
 
 <div id="entry-page">
     <div class="main-title-white">5 Dakikada İngilizce</div>
@@ -270,7 +270,11 @@ let activeLessonId = null;
 let isAutoTR = localStorage.getItem('auto_tr_voice') === 'true';
 if (isAutoTR) document.getElementById('autoTRToggle').classList.add('active');
 
-fetch('data.json').then(r => r.json()).then(data => { allLessonsData = data; renderLessonMenu(); });
+// GitHub'daki data.json dosyasını çekiyoruz
+fetch('data.json').then(r => r.json()).then(data => { 
+    allLessonsData = data; 
+    renderLessonMenu(); 
+}).catch(err => console.error("Data.json bulunamadı!", err));
 
 function renderLessonMenu() {
     const c = document.getElementById('lesson-list-container');
@@ -283,8 +287,8 @@ function renderLessonMenu() {
         let statusClass = ok ? 'completed' : 'disabled';
         if (i === 0) statusClass = 'active';
 
-        // İkon Kontrolü: JSON'da icon varsa onu kullan, yoksa varsayılanı kullan
-        const lessonIcon = lesson.icon || 'lesson1logo.svg';
+        // KLASÖR MANTIĞI: İkon logolar/ klasöründen çekiliyor
+        const lessonIcon = lesson.icon ? `logolar/${lesson.icon}` : 'logo.png';
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
@@ -305,10 +309,18 @@ function startLesson(lesson) {
         activeLessonId = lesson.id;
         currentList = [...data];
         const saved = localStorage.getItem('lesson_progress_' + activeLessonId);
-        if (saved) { const p = JSON.parse(saved); index = p.index; correctCount = p.correctCount; passedCount = p.passedCount; }
-        else { index = 0; correctCount = 0; passedCount = 0; }
+        if (saved) { 
+            const p = JSON.parse(saved); 
+            index = p.index; 
+            correctCount = p.correctCount; 
+            passedCount = p.passedCount; 
+        } else { 
+            index = 0; 
+            correctCount = 0; 
+            passedCount = 0; 
+        }
         document.getElementById('lessonTitle').innerText = lesson.title;
-        document.getElementById('lessonSubTitle').innerText = lesson.subTitle;
+        document.getElementById('lessonSubTitle').innerText = lesson.subTitle || "";
         document.getElementById('entry-page').style.display = 'none';
         document.getElementById('app-screen').style.display = 'flex';
         render(true);
@@ -396,8 +408,14 @@ document.getElementById('backBtn').onclick = () => { if (index > 0) { index--; r
 document.getElementById('passBtn').onclick = () => { passedCount++; currentList.push(currentList[index]); nextWord(); };
 
 function nextWord() {
-    if (index < currentList.length - 1) { index++; showEn = false; render(true); document.getElementById('result').innerHTML = ''; }
-    else { document.getElementById('restartOverlay').style.display = 'flex'; }
+    if (index < currentList.length - 1) { 
+        index++; 
+        showEn = false; 
+        render(true); 
+        document.getElementById('result').innerHTML = ''; 
+    } else { 
+        document.getElementById('restartOverlay').style.display = 'flex'; 
+    }
 }
 
 function toggleAutoTR() {
