@@ -288,7 +288,7 @@ function renderLessonMenu() {
         if (i === 0) statusClass = 'active';
 
         // KLASÖR MANTIĞI: İkon logolar/ klasöründen çekiliyor
-        const lessonIcon = lesson.icon ? `logolar/${lesson.icon}` : 'logo.png';
+   const lessonIcon = lesson.icon ? `svg/${lesson.icon}` : 'svg/1.svg';
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
