@@ -63,24 +63,27 @@
             position: relative;
         }
 
+        /* ══ YENİLENEN DERS KARTI YAPISI ══ */
         .lesson-card {
             position: relative;
             display: flex;
-            flex-direction: column;
+            flex-direction: row-reverse !important; /* LOGO SAĞA, YAZI SOLA */
             align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: transform 0.2s;
             width: 100%;
+            gap: 20px; /* Logo ve yazı arası boşluk */
         }
 
         /* Zikzak Dizilimi */
-        .lesson-card:nth-child(4n+2) { transform: translateX(50px); }
-        .lesson-card:nth-child(4n+3) { transform: translateX(80px); }
-        .lesson-card:nth-child(4n+4) { transform: translateX(50px); }
+        .lesson-card:nth-child(4n+2) { transform: translateX(30px); }
+        .lesson-card:nth-child(4n+3) { transform: translateX(50px); }
+        .lesson-card:nth-child(4n+4) { transform: translateX(30px); }
 
         .node-btn {
-            width: 85px;
-            height: 85px;
+            width: 100px; /* BÜYÜTÜLDÜ */
+            height: 100px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -88,17 +91,28 @@
             position: relative;
             z-index: 2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex-shrink: 0;
         }
 
-        /* Logo Ayarları - SVG'ler için optimize edildi */
-  .node-logo {
-    width: 60px; /* Sabit boyut vererek görünürlüğü garantileyin */
-    height: 60px;
-    background-size: contain !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
-}
+        .node-logo {
+            width: 75%; /* İkon boyutu artırıldı */
+            height: 75%;
+            background-size: contain !important;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: block;
+        }
+
+        .lesson-card h3 {
+            font-size: 15px; /* Yazı boyutu artırıldı */
+            font-weight: 800;
+            margin-top: 0 !important;
+            color: #f8fafc;
+            text-align: right; /* Yazıyı logoya yaslar */
+            max-width: 180px;
+            font-family: 'Poppins';
+            line-height: 1.2;
+        }
 
         @keyframes floatAnim {
             0%, 100% { transform: translateY(0); }
@@ -107,31 +121,20 @@
 
         /* Durum Renkleri */
         .lesson-card.completed .node-btn { background: var(--completed-gold); box-shadow: 0 8px 0 var(--completed-shadow); }
-        
         .lesson-card.active .node-btn { 
             background: var(--current-orange); 
             box-shadow: 0 8px 0 var(--current-shadow); 
-            width: 100px; 
-            height: 100px;
+            width: 110px; 
+            height: 110px;
             animation: floatAnim 2.5s ease-in-out infinite;
         }
-        
         .lesson-card.disabled .node-btn { background: var(--locked-gray); box-shadow: 0 8px 0 var(--locked-shadow); opacity: 0.6; }
         .lesson-card.disabled .node-logo { filter: grayscale(1) opacity(0.5); }
 
-        .lesson-card h3 {
-            font-size: 12px;
-            font-weight: 800;
-            margin-top: 12px;
-            color: #94a3b8;
-            text-align: center;
-            max-width: 140px;
-            font-family: 'Poppins';
-        }
-
         .start-badge {
             position: absolute;
-            top: -28px;
+            top: -20px;
+            right: 10px;
             background: white;
             color: var(--current-orange);
             padding: 5px 12px;
@@ -148,7 +151,7 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* ══ APP SCREEN ══ */
+        /* ══ APP SCREEN (DEĞİŞMEDİ) ══ */
         #app-screen {
             display: none;
             flex-direction: column;
@@ -270,7 +273,6 @@ let activeLessonId = null;
 let isAutoTR = localStorage.getItem('auto_tr_voice') === 'true';
 if (isAutoTR) document.getElementById('autoTRToggle').classList.add('active');
 
-// GitHub'daki data.json dosyasını çekiyoruz
 fetch('data.json').then(r => r.json()).then(data => { 
     allLessonsData = data; 
     renderLessonMenu(); 
@@ -287,9 +289,7 @@ function renderLessonMenu() {
         let statusClass = ok ? 'completed' : 'disabled';
         if (i === 0) statusClass = 'active';
 
-        // KLASÖR MANTIĞI: İkon logolar/ klasöründen çekiliyor
-// BUNU YAPIŞTIR:
-const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
+        const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
 
         card.className = `lesson-card ${statusClass}`;
         card.onclick = () => { if (ok) startLesson(lesson); };
@@ -297,8 +297,9 @@ const lessonIcon = lesson.icon ? lesson.icon : 'logolar/logo1.svg';
         card.innerHTML = `
             ${statusClass === 'active' ? '<div class="start-badge">HADİ!</div>' : ''}
             <div class="node-btn">
-           <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
-            <h3>${lesson.title}</h3>
+                <div class="node-logo" style="background-image: url('${lessonIcon}');"></div>
+            </div>
+            <h3>${lesson.subTitle || lesson.title}</h3>
         `;
         c.appendChild(card);
     });
